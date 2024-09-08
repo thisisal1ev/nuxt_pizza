@@ -1,5 +1,22 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
-  devtools: { enabled: true }
+  devtools: { enabled: true },
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+
+  modules: [
+    '@nuxt/fonts'
+  ],
+
+  css: ['./app/main.css'],
+
+  fonts: {
+    families: [
+      { name: 'nunito', provider: 'google' },
+    ],
+  },
 })
