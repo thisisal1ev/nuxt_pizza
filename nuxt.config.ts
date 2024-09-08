@@ -9,10 +9,11 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    '@pinia/nuxt',
   ],
 
-  css: ['./app/main.css'],
+  css: ['./app/main.scss'],
 
   fonts: {
     families: [
