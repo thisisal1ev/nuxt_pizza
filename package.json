@@ -7,11 +7,16 @@
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
+		"postinstall": "nuxt prepare",
+		"prisma:push": "prisma db push",
+		"prisma:studio": "prisma studio"
 	},
 	"dependencies": {
+		"@prisma/nuxt": "^0.0.35",
 		"nuxt": "^3.13.0",
+		"nuxt-lucide-icons": "^1.0.5",
 		"pinia": "^2.2.2",
+		"prisma": "^5.19.1",
 		"sass": "^1.78.0",
 		"vue": "latest",
 		"vue-router": "latest"
@@ -19,6 +24,7 @@
 	"devDependencies": {
 		"@nuxt/fonts": "^0.7.2",
 		"@pinia/nuxt": "^0.5.4",
+		"@prisma/client": "^5.19.1",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.4.45",
 		"tailwindcss": "^3.4.10"

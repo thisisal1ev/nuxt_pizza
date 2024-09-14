@@ -7,3 +7,9 @@
 		@apply font-nunito text-sm leading-5 font-normal;
 	}
 }
+
+@layer components {
+	.container {
+		@apply w-full max-w-base px-5 mx-auto;
+	}
+}

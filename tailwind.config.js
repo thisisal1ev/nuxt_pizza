@@ -14,6 +14,16 @@ module.exports = {
 			fontFamily: {
 				nunito: ['Nunito', 'sans-serif'],
 			},
+			colors: {
+				primary: '#FE5F00',
+				grey: '#B1B1B1',
+				success: '#1BB486',
+				danger: '#FF544A',
+				warning: '#917C12',
+			},
+			maxWidth: {
+				base: '1440px',
+			},
 		},
 	},
 	plugins: [],

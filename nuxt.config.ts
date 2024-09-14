@@ -11,13 +11,23 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/fonts',
     '@pinia/nuxt',
+    "@prisma/nuxt",
+    'nuxt-lucide-icons',
   ],
 
-  css: ['./app/main.scss'],
+  prisma: {
+    autoSetupPrisma: true,
+  },
+
+  css: ['./assets/main.scss'],
 
   fonts: {
     families: [
       { name: 'nunito', provider: 'google' },
     ],
+  },
+
+  experimental: {
+    componentIslands: true,
   },
 })
