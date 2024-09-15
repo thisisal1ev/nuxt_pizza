@@ -1,8 +1,8 @@
 <template>
 	<div class="flex flex-col w-full min-h-screen">
-		<Header />
 		<NuxtLoadingIndicator />
-		<main class="grow h-auto">
+		<Header />
+		<main class="grow h-auto container">
 			<slot />
 		</main>
 	</div>

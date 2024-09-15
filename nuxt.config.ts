@@ -8,6 +8,18 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    head: {
+      title: 'Nuxt Pizza',
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      meta: [
+        { name: 'description', content: 'Nuxt Pizza' },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.png' }],
+    },
+  },
+
   modules: [
     '@nuxt/fonts',
     '@pinia/nuxt',
