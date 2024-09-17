@@ -50,7 +50,7 @@ module.exports = {
 				},
 			},
 			maxWidth: {
-				base: '1440px',
+				base: '1240px',
 			},
 		},
 	},

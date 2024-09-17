@@ -42,4 +42,6 @@ export default defineNuxtConfig({
   experimental: {
     componentIslands: true,
   },
+
+  compatibilityDate: '2024-09-15',
 })
