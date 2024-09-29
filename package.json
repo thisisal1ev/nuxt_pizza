@@ -24,7 +24,7 @@
 	"devDependencies": {
 		"@nuxt/fonts": "^0.7.2",
 		"@pinia/nuxt": "^0.5.4",
-		"@prisma/client": "^5.19.1",
+		"@prisma/client": "^5.20.0",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.4.45",
 		"tailwindcss": "^3.4.10"
