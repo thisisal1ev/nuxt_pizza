@@ -24,8 +24,13 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@pinia/nuxt',
     "@prisma/nuxt",
+    '@vueuse/nuxt',
     'nuxt-lucide-icons',
   ],
+
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
 
   prisma: {
     autoSetupPrisma: true,

@@ -31,12 +31,12 @@
 			</label>
 
 			<div class="flex items-center justify-center space-x-4">
-				<Button variant='outline' class="gap-1" size="default">
+				<Button variant="outline" class="gap-1" size="default">
 					<LucideUser :size="16" class="w-4 h-5" />
 					<span>Войти</span>
 				</Button>
 
-				<Button variant='default' size="default" class="relative group">
+				<Button variant="default" size="default" class="relative group">
 					<b>520 &#8381;</b>
 					<span class="h-full w-[1px] bg-white/30 mx-3"></span>
 

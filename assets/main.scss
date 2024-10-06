@@ -36,6 +36,11 @@
 	body {
 		@apply font-nunito text-sm leading-5 font-normal;
 
+		a,
+		button {
+			@apply outline-none;
+		}
+
 		h1 {
 			@apply text-[48px];
 		}

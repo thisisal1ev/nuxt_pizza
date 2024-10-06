@@ -40,8 +40,8 @@ model Category {
 model Product {
   id Int @id @default(autoincrement())
 
-  name     String
-  imageUrl String
+  name   String
+  imgURL String
 
   ingredients Ingredient[]
   items       ProductItem[]
@@ -69,9 +69,9 @@ model ProductItem {
 model Ingredient {
   id Int @id @default(autoincrement())
 
-  name     String
-  price    Int
-  imageUrl String
+  name   String
+  price  Int
+  imgURL String
 
   products  Product[]
   cartItems CartItem[]
@@ -151,8 +151,8 @@ model VerificationCode {
 }
 
 model Story {
-  id              Int    @id @default(autoincrement())
-  previewImageUrl String
+  id            Int    @id @default(autoincrement())
+  previewimgURL String
 
   items StoryItem[]
 
