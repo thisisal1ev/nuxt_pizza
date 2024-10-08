@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_URL")
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
@@ -152,7 +152,7 @@ model VerificationCode {
 
 model Story {
   id            Int    @id @default(autoincrement())
-  previewimgURL String
+  previewImgURL String
 
   items StoryItem[]
 
