@@ -17,28 +17,29 @@ const props = defineProps<{
 }>()
 
 const target = ref<HTMLElement | null>(null)
-const store = useCategoryStore().setActiveId
+const store = useCategoryStore()
 
 const intersection = useIntersectionObserver(
 	target,
 	(entry: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-		store(props.categoryId)
+		if (entry[0].isIntersecting) {
+			watchEffect(() => {
+				if (intersection?.isActive) {
+					store.setActiveId(props.categoryId)
+					console.log(store.activeId)
+				}
+			})
+		}
 	},
 	{
+		rootMargin: '0px',
 		threshold: 0.4,
 	}
 )
-
-watchEffect(() => {
-	if (intersection?.isActive) {
-		store(props.categoryId)
-		console.log(props.title, props.categoryId)
-	}
-})
 </script>
 
 <template>
-	<div ref="target" :id="title">
+	<div class="target" ref="target" :id="title">
 		<h2 class="font-extrabold mb-5 text-[32px]">{{ title }}</h2>
 
 		<div class="grid grid-cols-3 gap-[50px]">

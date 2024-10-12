@@ -17,18 +17,9 @@
 				</div>
 			</NuxtLink>
 
-			<label class="relative grow">
-				<LucideSearch
-					:size="20"
-					color="#ADADAD"
-					class="absolute left-3 top-1/4"
-				/>
-				<input
-					class="outline-none w-full py-3 rounded-2xl px-10 bg-[#f9f9f9]"
-					type="text"
-					placeholder="Поиск пиццы..."
-				/>
-			</label>
+			<div class="mx-10 flex-1">
+				<SearchInput />
+			</div>
 
 			<div class="flex items-center justify-center space-x-4">
 				<Button variant="outline" class="gap-1" size="default">

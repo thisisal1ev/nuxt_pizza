@@ -15,6 +15,7 @@
 	"dependencies": {
 		"@prisma/nuxt": "^0.0.35",
 		"@types/bcrypt": "^5.0.2",
+		"axios": "^1.7.7",
 		"bcrypt": "^5.1.1",
 		"nuxt": "^3.13.0",
 		"nuxt-lucide-icons": "^1.0.5",
