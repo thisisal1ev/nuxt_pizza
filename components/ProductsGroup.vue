@@ -17,7 +17,7 @@ const props = defineProps<{
 }>()
 
 const target = ref<HTMLElement | null>(null)
-const store = useCategoryStore()
+const store = useCategoryStore().setActiveId
 
 const intersection = useIntersectionObserver(
 	target,
@@ -25,8 +25,7 @@ const intersection = useIntersectionObserver(
 		if (entry[0].isIntersecting) {
 			watchEffect(() => {
 				if (intersection?.isActive) {
-					store.setActiveId(props.categoryId)
-					console.log(store.activeId)
+					store(props.categoryId)
 				}
 			})
 		}

@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { ref, computed } from 'vue'
+import { useCategoryStore } from '~/stores/category'
+
 const cats = ref([
 	'Пиццы',
 	'Завтрак',
@@ -9,22 +12,24 @@ const cats = ref([
 	'Мясные',
 ])
 
-const activeIndex = useCategoryStore().activeId
+const store = useCategoryStore()
+const activeIndex = computed(() => store.activeId)
 </script>
 
 <template>
 	<div class="inline-flex gap-1 bg-gray-50 p-1 rounded-2xl">
 		<NuxtLink
 			v-for="(cat, index) in cats"
+			:to="activeIndex.value"
 			:key="index"
-			to="#"
-			:class="
-				activeIndex === index &&
-				'bg-white shadow-md shadow-gray-200 text-primary'
-			"
-			class="inline-flex items-center font-bold h-11 rounded-2xl px-5"
+			:class="[
+				'inline-flex items-center font-bold h-11 rounded-2xl px-5',
+				activeIndex === index
+					? 'bg-white shadow-md shadow-gray-200 text-primary'
+					: '',
+			]"
 		>
-			<button>{{ cat }}</button>
+			{{ cat }}
 		</NuxtLink>
 	</div>
 </template>

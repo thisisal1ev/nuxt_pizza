@@ -42,11 +42,21 @@ const onClickItem = () => {
 		:class="focused ? 'flex' : ''"
 		class="flex rounded-2xl flex-1 justify-between relative h-11 z-30"
 	>
-		<LucideSearch
-			:size="20"
-			color="#ADADAD"
+		<svg
 			class="absolute top-1/2 -translate-y-[50%] left-3 h-5 text-gray-400"
-		/>
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<circle cx="11" cy="11" r="8" />
+			<path d="m21 21-4.3-4.3" />
+		</svg>
 		<input
 			class="outline-none w-full rounded-2xl bg-gray-100 pl-11"
 			type="text"

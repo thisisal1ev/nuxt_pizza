@@ -25,7 +25,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     "@prisma/nuxt",
     '@vueuse/nuxt',
-    'nuxt-lucide-icons',
   ],
 
   pinia: {
@@ -36,7 +35,7 @@ export default defineNuxtConfig({
     autoSetupPrisma: true,
   },
 
-  css: ['./assets/main.scss'],
+  css: ['./assets/main.css'],
 
   fonts: {
     families: [

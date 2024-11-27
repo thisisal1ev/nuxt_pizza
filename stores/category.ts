@@ -8,7 +8,7 @@ export const useCategoryStore = defineStore('categoryStore', {
   state: (): State => ({
     activeId: 0,
   }),
-actions: {
+  actions: {
     setActiveId(id: number) {
       this.activeId = id
     },

@@ -35,31 +35,31 @@
 
 	body {
 		@apply font-nunito text-sm leading-5 font-normal;
+	}
 
-		a,
-		button {
-			@apply outline-none;
-		}
+	a,
+	button {
+		@apply outline-none;
+	}
 
-		h1 {
-			@apply text-[48px];
-		}
+	h1 {
+		@apply text-[48px];
+	}
 
-		h2 {
-			@apply text-[40px];
-		}
+	h2 {
+		@apply text-[40px];
+	}
 
-		h3 {
-			@apply text-[32px];
-		}
+	h3 {
+		@apply text-[32px];
+	}
 
-		h4 {
-			@apply text-[22px];
-		}
+	h4 {
+		@apply text-[22px];
+	}
 
-		h5 {
-			@apply text-[16px];
-		}
+	h5 {
+		@apply text-[16px];
 	}
 }
 

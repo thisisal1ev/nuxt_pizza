@@ -8,7 +8,6 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"prisma:push": "prisma db push",
-		"prisma:studio": "prisma studio",
 		"prisma:seed": "prisma db seed",
 		"postinstall": "nuxt prepare"
 	},
@@ -17,18 +16,16 @@
 		"@types/bcrypt": "^5.0.2",
 		"axios": "^1.7.7",
 		"bcrypt": "^5.1.1",
-		"nuxt": "^3.13.0",
-		"nuxt-lucide-icons": "^1.0.5",
+		"nuxt": "^3.14.1592",
 		"pinia": "^2.2.2",
 		"prisma": "^5.19.1",
-		"sass": "^1.78.0",
 		"vue": "latest",
 		"vue-router": "latest"
 	},
 	"devDependencies": {
 		"@nuxt/fonts": "^0.7.2",
 		"@pinia/nuxt": "^0.5.4",
-		"@prisma/client": "^5.20.0",
+		"@prisma/client": "^5.22.0",
 		"@types/node": "^22.7.4",
 		"@vueuse/core": "^11.1.0",
 		"@vueuse/nuxt": "^11.1.0",

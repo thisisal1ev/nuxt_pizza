@@ -2,7 +2,20 @@
 	<div
 		class="inline-flex items-center gap-x-1 bg-gray-50 px-5 h-[52px] rounded-2xl cursor-pointer"
 	>
-		<LucideArrowUpDown size="16" />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<path d="M12 5v14" />
+			<path d="m19 12-7 7-7-7" />
+		</svg>
 		<b>Сортировка:</b>
 		<b class="text-primary">популярное</b>
 	</div>
