@@ -6,7 +6,7 @@ interface State {
 
 export const useCategoryStore = defineStore('categoryStore', {
   state: (): State => ({
-    activeId: 0,
+    activeId: 1,
   }),
   actions: {
     setActiveId(id: number) {

@@ -2,7 +2,7 @@
 defineProps<{
 	id: number
 	name: string
-	price: string
+	price: number
 	imgURL: string
 }>()
 </script>
@@ -14,7 +14,7 @@ defineProps<{
 				<img class="w-[215px] h-[215px]" :src="imgURL" :alt="name" />
 			</div>
 
-			<h4 class="text-[22px] mt-3 mb-1 font-bold">{{ name }}</h4>
+			<h4 class="mt-3 mb-1 font-bold leading-8">{{ name }}</h4>
 
 			<p class="text-sm text-gray-400">
 				Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус

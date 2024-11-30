@@ -5,7 +5,6 @@ interface ProductQuery {
 }
 
 export default defineEventHandler(async (event) => {
-	// const users = await prisma.user.findMany()
 	const gettingQuery = getQuery(event) as ProductQuery
 	const query = gettingQuery.query || ''
 

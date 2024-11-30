@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 interface IPrices {
-	price: string
+	price: number
 }
 
 interface IProduct {
@@ -39,7 +39,7 @@ const intersection = useIntersectionObserver(
 
 <template>
 	<div class="target" ref="target" :id="title">
-		<h2 class="font-extrabold mb-5 text-[32px]">{{ title }}</h2>
+		<h2 class="font-extrabold mb-5">{{ title }}</h2>
 
 		<div class="grid grid-cols-3 gap-[50px]">
 			<ProductCard

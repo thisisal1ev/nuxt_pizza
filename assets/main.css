@@ -33,8 +33,8 @@
 		--radius: 18px;
 	}
 
-	body {
-		@apply font-nunito text-sm leading-5 font-normal;
+	html,body {
+		@apply font-nunito text-sm leading-5 font-normal scroll-smooth
 	}
 
 	a,

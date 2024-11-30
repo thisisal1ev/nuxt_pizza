@@ -17,7 +17,7 @@ const debouncedSearch = useDebounceFn(async () => {
 		const response = await Api.products.search(searchQuery.value)
 		products.value = response
 	} catch (error) {
-		console.log(error)
+		console.error('Error:', error.message)
 	}
 }, 250)
 
@@ -60,8 +60,7 @@ const onClickItem = () => {
 		<input
 			class="outline-none w-full rounded-2xl bg-gray-100 pl-11"
 			type="text"
-			@change="e => (searchQuery = e.target.value)"
-			:value="searchQuery.value"
+			v-model="searchQuery"
 			placeholder="Поиск пиццы..."
 			@focus="() => (focused = true)"
 		/>
