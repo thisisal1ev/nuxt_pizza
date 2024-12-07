@@ -2,7 +2,7 @@
 import prisma from '~/lib/prisma'
 
 const fetchCategories = async () => {
-	return prisma.category.findMany({
+	return await prisma.category.findMany({
 		include: {
 			products: {
 				include: {
@@ -37,8 +37,8 @@ const filteredCategories = data.value?.filter(
 				<div class="flex-1">
 					<div class="flex flex-col gap-16">
 						<ProductsGroup
-							v-for="category in data"
 							v-if="data !== undefined"
+							v-for="category in data"
 							:categoryId="category.id"
 							:title="category.name"
 							:key="category.id"

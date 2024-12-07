@@ -22,7 +22,7 @@ const store = useCategoryStore().setActiveId
 const intersection = useIntersectionObserver(
 	target,
 	(entry: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-		if (entry[0].isIntersecting) {
+		if (entry	[0].isIntersecting) {
 			watchEffect(() => {
 				if (intersection?.isActive) {
 					store(props.categoryId)
@@ -38,7 +38,7 @@ const intersection = useIntersectionObserver(
 </script>
 
 <template>
-	<div class="target" ref="target" :id="title">
+	<div ref="target" :id="title">
 		<h2 class="font-extrabold mb-5">{{ title }}</h2>
 
 		<div class="grid grid-cols-3 gap-[50px]">

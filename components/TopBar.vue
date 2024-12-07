@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Category } from '@prisma/client'
+import type { Category } from '@prisma/client'
 
 defineProps<{
 	categories: Category[]

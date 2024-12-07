@@ -5,7 +5,7 @@ const {
 } = useRoute()
 
 const fetchProduct = async () => {
-	return prisma.product.findFirst({
+	return await prisma.product.findFirst({
 		where: {
 			id: Number(id),
 		},
@@ -29,7 +29,7 @@ if (data.value === null) {
 			<div class="w-[490px] bg-[#f7f6f5] p-7 space-y-5">
 				<h4 class="font-extrabold mb-1">{{ data?.name }}</h4>
 				<p class="text-gray-400">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Lorem ipsum dolor sit amat connecter adipisicing edit.
 				</p>
 
 				<GroupVariants

@@ -8,13 +8,13 @@ type Variant =
 	| 'link'
 type Size = 'default' | 'sm' | 'lg' | 'icon'
 
-const props = defineProps<{
+const { size, variant } = defineProps<{
 	variant: Variant
 	size: Size
 }>()
 
 const buttonClass = computed<string>(() => {
-	switch (props.variant) {
+	switch (variant) {
 		case 'outline':
 			return 'border border-primary text-primary bg-transparent hover:bg-primary hover:text-white'
 		case 'ghost':
@@ -31,7 +31,7 @@ const buttonClass = computed<string>(() => {
 })
 
 const sizeClass = computed<string>(() => {
-	switch (props.size) {
+	switch (size) {
 		case 'sm':
 			return 'h-9 rounded-md px-3'
 		case 'lg':
