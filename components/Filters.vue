@@ -1,3 +1,21 @@
+<script lang="ts" setup>
+const ingredients = useFilterIngredients()
+
+interface IRecept {
+	text: string
+	value: number
+}
+
+const items = ref<IRecept[]>([])
+
+watchEffect(() => {
+	items.value = ingredients.value.map(item => ({
+		value: item.id,
+		text: item.name,
+	}))
+})
+</script>
+
 <template>
 	<div>
 		<h3 class="mb-5 font-extrabold">Фильтрация</h3>
@@ -27,23 +45,13 @@
 			</div>
 		</div>
 
-		<CheckboxFilteresGroup
-			title="Ингредиенты:"
-			:limit="6"
-			:items="[
-				{ text: 'Сырный соус', value: 1 },
-				{ text: 'Моцарелла', value: 2 },
-				{ text: 'Чеснок', value: 3 },
-				{ text: 'Красный лук', value: 5 },
-				{ text: 'Томаты', value: 6 },
-			]"
-			:default-value="[
-				{ text: 'Сырный соус', value: 1 },
-				{ text: 'Моцарелла', value: 2 },
-				{ text: 'Чеснок', value: 3 },
-				{ text: 'Красный лук', value: 5 },
-				{ text: 'Томаты', value: 6 },
-			]"
-		/>
+		<ClientOnly>
+			<CheckboxFilteresGroup
+				title="Ингредиенты:"
+				:limit="6"
+				:defaultValue="items.slice(0, 6)"
+				:items
+			/>
+		</ClientOnly>
 	</div>
 </template>

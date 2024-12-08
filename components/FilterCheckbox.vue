@@ -1,7 +1,12 @@
 <script lang="ts" setup>
-defineProps<{
+interface Props {
 	value: number
-}>()
+	endAdornment?: string
+	onCheckedChange?: (checked: boolean) => void
+	checked?: boolean
+}
+
+defineProps<Props>()
 </script>
 
 <template>
@@ -9,6 +14,8 @@ defineProps<{
 		<label class="gap-2 flex items-center"
 			><div class="inline-flex items-center relative rounded-lg bg-slate-200">
 				<input
+					:checked="checked"
+					@checked="onCheckedChange"
 					:value="value"
 					type="checkbox"
 					class="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-lg checked:bg-primary outline-none"
@@ -37,5 +44,6 @@ defineProps<{
 				<slot />
 			</span>
 		</label>
+		{{ endAdornment }}
 	</div>
 </template>
