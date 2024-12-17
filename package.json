@@ -14,9 +14,11 @@
 	"dependencies": {
 		"@prisma/nuxt": "^0.0.35",
 		"axios": "^1.7.7",
+		"bcrypt": "^5.1.1",
 		"nuxt": "^3.14.1592",
 		"pinia": "^2.2.2",
 		"prisma": "^5.19.1",
+		"qs": "^6.13.1",
 		"vue": "latest",
 		"vue-router": "latest"
 	},
@@ -29,9 +31,7 @@
 		"@vueuse/core": "^11.1.0",
 		"@vueuse/nuxt": "^11.1.0",
 		"autoprefixer": "^10.4.20",
-		"bcrypt": "^5.1.1",
 		"postcss": "^8.4.45",
-		"qs": "^6.13.1",
 		"tailwindcss": "^3.4.10",
 		"tsx": "^4.19.1",
 		"typescript": "^5.6.2"
