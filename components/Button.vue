@@ -8,10 +8,12 @@ type Variant =
 	| 'link'
 type Size = 'default' | 'sm' | 'lg' | 'icon'
 
-const { size, variant } = defineProps<{
+interface Props {
 	variant: Variant
 	size: Size
-}>()
+}
+
+const { size, variant } = defineProps<Props>()
 
 const buttonClass = computed<string>(() => {
 	switch (variant) {
@@ -47,6 +49,7 @@ const sizeClass = computed<string>(() => {
 <template>
 	<button
 		:class="[buttonClass, sizeClass]"
+		type="button"
 		class="inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:bg-gray-500 active:opacity-50"
 	>
 		<slot />

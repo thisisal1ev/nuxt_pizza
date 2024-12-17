@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import prisma from '~/lib/prisma'
 
 const fetchCategories = async () => {
@@ -21,7 +21,7 @@ const filteredCategories = data.value?.filter(
 </script>
 
 <template>
-	<section class="mt-10">
+	<div class="mt-10">
 		<div class="container">
 			<h3 class="font-extrabold">Все пиццы</h3>
 		</div>
@@ -48,5 +48,5 @@ const filteredCategories = data.value?.filter(
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 </template>

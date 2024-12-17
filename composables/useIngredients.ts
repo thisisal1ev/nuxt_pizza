@@ -1,15 +1,20 @@
 import type { Ingredient } from '@prisma/client'
 import { getAll } from '~/services/ingredients'
 
-type IngredientItem = Pick<Ingredient, 'id' | 'name'>
+interface ReturnProps {
+	ingredients: Ref<Ingredient[]>
+	loading: Ref<boolean>
+}
 
-export const useFilterIngredients = () => {
-	const ingredients = ref<IngredientItem[]>([])
+export const useIngredients = (): ReturnProps => {
+	const ingredients = ref<Ingredient[]>([])
+	const loading = ref<boolean>(true)
 
 	const fetchIngredients = async () => {
 		try {
 			const fetchedIngredients = await getAll()
 			ingredients.value = fetchedIngredients
+			loading.value = false
 		} catch (e: any) {
 			console.error('Error fetching ingredients:', e.message)
 		}
@@ -17,5 +22,8 @@ export const useFilterIngredients = () => {
 
 	onMounted(fetchIngredients)
 
-	return ingredients
+	return {
+		ingredients,
+		loading
+	}
 }

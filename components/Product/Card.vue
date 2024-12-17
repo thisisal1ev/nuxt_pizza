@@ -1,17 +1,21 @@
 <script lang="ts" setup>
-defineProps<{
+interface Props {
 	id: number
 	name: string
 	price: number
 	imgURL: string
-}>()
+}
+
+defineProps<Props>()
 </script>
 
 <template>
-	<NuxtLink :to="'/product/' + id">
-		<div class="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-			<img class="w-[215px] h-[215px]" :src="imgURL" :alt="name" />
-		</div>
+	<div>
+		<NuxtLink :to="'/product/' + id">
+			<div class="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
+				<img class="w-[215px] h-[215px]" :src="imgURL" :alt="name" />
+			</div>
+		</NuxtLink>
 
 		<h4 class="mt-3 mb-1 font-bold leading-8">{{ name }}</h4>
 
@@ -44,5 +48,5 @@ defineProps<{
 				Добавить
 			</Button>
 		</div>
-	</NuxtLink>
+	</div>
 </template>

@@ -10,11 +10,13 @@ interface IProduct {
 	imgURL: string
 }
 
-const props = defineProps<{
+interface Props {
 	title: string
 	categoryId: number
 	products: IProduct[]
-}>()
+}
+
+const props = defineProps<Props>()
 
 const target = ref<HTMLElement | null>(null)
 const store = useCategoryStore().setActiveId
@@ -22,7 +24,7 @@ const store = useCategoryStore().setActiveId
 const intersection = useIntersectionObserver(
 	target,
 	(entry: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-		if (entry	[0].isIntersecting) {
+		if (entry[0].isIntersecting) {
 			watchEffect(() => {
 				if (intersection?.isActive) {
 					store(props.categoryId)
@@ -38,7 +40,7 @@ const intersection = useIntersectionObserver(
 </script>
 
 <template>
-	<div ref="target" :id="title">
+	<section ref="target" :id="title">
 		<h2 class="font-extrabold mb-5">{{ title }}</h2>
 
 		<div class="grid grid-cols-3 gap-[50px]">
@@ -51,5 +53,5 @@ const intersection = useIntersectionObserver(
 				:price="product.items[0].price"
 			/>
 		</div>
-	</div>
+	</section>
 </template>
