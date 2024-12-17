@@ -1,22 +1,19 @@
 <script lang="ts" setup>
-import prisma from '~/lib/prisma'
+import type { Product } from '@prisma/client'
 
-const fetchCategories = async () => {
-	return await prisma.category.findMany({
-		include: {
-			products: {
-				include: {
-					ingredients: true,
-					items: true,
-				},
-			},
-		},
-	})
+interface Category {
+	id: number
+	name: string
+	createdAt: string
+	updatedAt: string
+	products: Product[]
 }
 
-const { data } = await useAsyncData('categories', fetchCategories)
+const { data } = await useAsyncData('categories', () =>
+	$fetch('/api/categories')
+)
 const filteredCategories = data.value?.filter(
-	category => category.products.length > 0
+	(category: Category) => category.products.length > 0
 )
 </script>
 
