@@ -37,6 +37,7 @@ const onClickItem = () => {
 		v-if="focused"
 		class="fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-30"
 	></div>
+
 	<label
 		ref="elementRef"
 		:class="focused ? 'flex' : ''"
@@ -57,10 +58,11 @@ const onClickItem = () => {
 			<circle cx="11" cy="11" r="8" />
 			<path d="m21 21-4.3-4.3" />
 		</svg>
+
 		<input
 			class="outline-none w-full rounded-2xl bg-gray-100 pl-11"
-			type="text"
-			v-model="searchQuery"
+			type="search"
+			v-model.trim="searchQuery"
 			placeholder="Поиск пиццы..."
 			@focus="() => (focused = true)"
 		/>

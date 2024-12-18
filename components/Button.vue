@@ -9,8 +9,8 @@ type Variant =
 type Size = 'default' | 'sm' | 'lg' | 'icon'
 
 interface Props {
-	variant: Variant
-	size: Size
+	variant?: Variant
+	size?: Size
 }
 
 const { size, variant } = defineProps<Props>()

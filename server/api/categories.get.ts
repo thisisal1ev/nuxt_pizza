@@ -12,5 +12,6 @@ export default defineEventHandler(async () => {
 			},
 		},
 	})
+
 	return categories
 })

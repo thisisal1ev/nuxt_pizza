@@ -4,8 +4,8 @@ import type { Product } from '@prisma/client'
 interface Category {
 	id: number
 	name: string
-	createdAt: string
-	updatedAt: string
+	createdAt: Date
+	updatedAt: Date
 	products: Product[]
 }
 
