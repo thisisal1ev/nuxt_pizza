@@ -15,6 +15,5 @@ export const useQueryFilters = (filters: Filters) => {
 
 		const query = qs.stringify(params.value, { arrayFormat: 'comma' })
 		query === '' ? router.push('') : newRouter.push(`?${query}`)
-		console.log(query)
 	})
 }

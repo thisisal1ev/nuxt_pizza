@@ -50,7 +50,7 @@ watchEffect(() => {
 			class="mb-3"
 		>
 			<input
-				type="text"
+				type="search"
 				v-model.trim="searchInput"
 				:placeholder="searchInputPlaceholder ?? 'Поиск...'"
 				class="bg-gray-50 border-none px-5 py-3 w-full outline-none rounded-md"
