@@ -1,9 +1,17 @@
 <script lang="ts" setup>
+import type { PizzaSize, PizzaType } from '~/constants/pizza'
 import { getCartItemDetails } from '~/lib/get-cart-item-details'
+import { useCartStore } from '~/stores/cart'
 
 defineProps<{
 	isVisible: boolean
 }>()
+
+const { fetchCartItems, totalAmount, items } = useCartStore()
+
+onMounted(async () => {
+	await fetchCartItems()
+})
 
 const emit = defineEmits(['close'])
 
@@ -24,141 +32,47 @@ function close() {
 		class="fixed top-0 right-0 outline-none w-1/4 z-50 bg-[#f1f4ee] overscroll-none transform duration-500 h-screen"
 	>
 		<div class="flex flex-col h-full justify-between">
-			<div class="overflow-auto flex-1">
-				<div class="flex flex-col items-start grow pt-8 pb-2 px-10">
-					<div class="flex items-center justify-between w-full">
-						<h4>
-							<span
-								>В корзине <b>{{ 3 }} товара</b></span
-							>
-						</h4>
-						<button type="button" @click="close">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path d="M18 6 6 18" />
-								<path d="m6 6 12 12" />
-							</svg>
-						</button>
-					</div>
+			<div class="flex flex-col items-start p-10">
+				<div class="flex items-center justify-between w-full">
+					<h4>
+						<span
+							>В корзине <b>{{ 3 }} товара</b></span
+						>
+					</h4>
+					<button type="button" @click="close">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M18 6 6 18" />
+							<path d="m6 6 12 12" />
+						</svg>
+					</button>
 				</div>
+			</div>
 
+			<div class="overflow-auto flex-1 grow space-y-5">
 				<CartDrawerItem
-					:class="'my-5 py-3 px-5'"
-					:id="1"
-					:imageURL="'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp'"
-					:name="'Пепперони фреш'"
+					v-for="item in items"
+					:class="'py-3 px-5'"
+					:key="item.id"
+					:id="item.id"
+					:imageURL="item.imageUrl"
+					:name="item.name"
 					:details="
-						getCartItemDetails(2, 30, [
-							{
-								id: 1,
-								name: 'Шампиньоны',
-								price: 30,
-								imgURL:
-									'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
-								createdAt: new Date(),
-								updatedAt: new Date(),
-							},
-						])
+						item.pizzaType && item.pizzaSize
+							? getCartItemDetails(item.ingredients, item.pizzaType as PizzaType, item.pizzaSize as PizzaSize)
+							: ''
 					"
-					:quantity="1"
-					:price="500"
-				/>
-
-				<CartDrawerItem
-					:class="'my-5 py-3 px-5'"
-					:id="1"
-					:imageURL="'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp'"
-					:name="'Пепперони фреш'"
-					:details="
-						getCartItemDetails(2, 30, [
-							{
-								id: 1,
-								name: 'Шампиньоны',
-								price: 30,
-								imgURL:
-									'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
-								createdAt: new Date(),
-								updatedAt: new Date(),
-							},
-						])
-					"
-					:quantity="1"
-					:price="500"
-				/>
-
-				<CartDrawerItem
-					:class="'my-5 py-3 px-5'"
-					:id="1"
-					:imageURL="'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp'"
-					:name="'Пепперони фреш'"
-					:details="
-						getCartItemDetails(2, 30, [
-							{
-								id: 1,
-								name: 'Шампиньоны',
-								price: 30,
-								imgURL:
-									'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
-								createdAt: new Date(),
-								updatedAt: new Date(),
-							},
-						])
-					"
-					:quantity="1"
-					:price="500"
-				/>
-
-				<CartDrawerItem
-					:class="'my-5 py-3 px-5'"
-					:id="1"
-					:imageURL="'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp'"
-					:name="'Пепперони фреш'"
-					:details="
-						getCartItemDetails(2, 30, [
-							{
-								id: 1,
-								name: 'Шампиньоны',
-								price: 30,
-								imgURL:
-									'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
-								createdAt: new Date(),
-								updatedAt: new Date(),
-							},
-						])
-					"
-					:quantity="1"
-					:price="500"
-				/>
-
-				<CartDrawerItem
-					:class="'my-5 py-3 px-5'"
-					:id="1"
-					:imageURL="'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp'"
-					:name="'Пепперони фреш'"
-					:details="
-						getCartItemDetails(2, 30, [
-							{
-								id: 1,
-								name: 'Шампиньоны',
-								price: 30,
-								imgURL:
-									'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
-								createdAt: new Date(),
-								updatedAt: new Date(),
-							},
-						])
-					"
-					:quantity="1"
-					:price="500"
+					:quantity="item.quantity"
+					:price="item.price"
 				/>
 			</div>
 
@@ -171,7 +85,7 @@ function close() {
 								class="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2"
 							></span>
 						</div>
-						<b class="text-lg">{{ 500 }} &#8381;</b>
+						<b class="text-lg">{{ totalAmount }} &#8381;</b>
 					</div>
 
 					<NuxtLink to="/cart" class="inline-block w-full">

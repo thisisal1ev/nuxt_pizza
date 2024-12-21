@@ -1,0 +1,45 @@
+import { defineStore } from 'pinia'
+import { getCartDetails, type CartStateItem } from '../lib/get-cart-details'
+import { Api } from '../services/apiClient'
+import type { CreateCartItemValues } from '../services/dto/cart.dto'
+
+export interface CartState {
+	loading: boolean
+	error: boolean
+	totalAmount: number
+	items: CartStateItem[]
+}
+
+export const useCartStore = defineStore('cartStore', {
+	state: (): CartState => ({
+		loading: false,
+		error: false,
+		totalAmount: 0,
+		items: [],
+	}),
+
+	actions: {
+		async fetchCartItems() {
+			this.loading = true
+			this.error = false
+
+			try {
+				const data = await Api.cart.fetchCart()
+				const details = getCartDetails(data)
+				this.items = details.items
+				this.totalAmount = details.totalAmount
+			} catch (error: any) {
+				this.error = true
+				console.error(error.message)
+			} finally {
+				this.loading = false
+			}
+		},
+
+		async updateItemQuantity(id: number, quantity: number) { },
+
+		async removeCartItem(id: number) { },
+
+		async addCartItem(values: CreateCartItemValues) { },
+	},
+})
