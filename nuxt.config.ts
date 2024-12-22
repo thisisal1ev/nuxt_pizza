@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Nuxt Pizza',
+      title: 'Nuxt Pizza - вкусней уже некуда',
       htmlAttrs: {
         lang: 'ru'
       },

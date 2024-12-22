@@ -24,7 +24,7 @@ export const useCartStore = defineStore('cartStore', {
 			this.error = false
 
 			try {
-				const data = await Api.cart.fetchCart()
+				const data = await Api.cart.getCart()
 				const details = getCartDetails(data)
 				this.items = details.items
 				this.totalAmount = details.totalAmount
@@ -36,7 +36,22 @@ export const useCartStore = defineStore('cartStore', {
 			}
 		},
 
-		async updateItemQuantity(id: number, quantity: number) { },
+		async updateItemQuantity(id: number, quantity: number) {
+			this.loading = true
+			this.error = false
+
+			try {
+				const data = await Api.cart.updateItemQuantity(id, quantity)
+				const details = getCartDetails(data)
+				this.items = details.items
+				this.totalAmount = details.totalAmount
+			} catch (error: any) {
+				this.error = true
+				console.error(error.message)
+			} finally {
+				this.loading = false
+			}
+		},
 
 		async removeCartItem(id: number) { },
 

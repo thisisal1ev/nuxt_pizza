@@ -1,6 +1,14 @@
+import type { CartDTO } from './dto/cart.dto'
 import { axiosInstance } from './instance'
-import type { CartDTD } from './dto/cart.dto'
 
-export const fetchCart = async (): Promise<CartDTD> => {
-	return (await axiosInstance.get<CartDTD>('/cart')).data
+export const getCart = async (): Promise<CartDTO> => {
+	const fetchedData = await axiosInstance.get<CartDTO[]>('/cart')
+
+	return fetchedData.data[0]
+}
+
+export const updateItemQuantity = async (id: number, quantity: number): Promise<CartDTO> => {
+	const { data } = await axiosInstance.patch<CartDTO>('/cart/' + id, { quantity })
+
+	return data
 }

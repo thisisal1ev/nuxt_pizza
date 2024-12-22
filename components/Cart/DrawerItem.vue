@@ -7,6 +7,7 @@ interface Props {
 	price: number
 	quantity: number
 	class?: string
+	onClickCountButton?: (type: 'plus' | 'minus') => void
 }
 
 defineProps<Props>()
@@ -22,7 +23,7 @@ defineProps<Props>()
 			<hr class="my-3" />
 
 			<div class="flex items-center justify-between">
-				<CountButton :quantity :size="'sm'" />
+				<CountButton :onClick="onClickCountButton" :quantity :size="'sm'" />
 
 				<div class="flex items-center gap-3">
 					<CartItemDetailsPrice :price />

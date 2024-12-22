@@ -7,7 +7,7 @@ defineProps<{
 	isVisible: boolean
 }>()
 
-const { fetchCartItems, totalAmount, items } = useCartStore()
+const { fetchCartItems, totalAmount, items, loading } = useCartStore()
 
 onMounted(async () => {
 	await fetchCartItems()
@@ -17,6 +17,14 @@ const emit = defineEmits(['close'])
 
 function close() {
 	emit('close')
+}
+
+const onClickCountButton = (
+	id: number,
+	quantity: number,
+	type: 'plus' | 'minus'
+) => {
+	console.log(id, quantity, type)
 }
 </script>
 
@@ -36,7 +44,7 @@ function close() {
 				<div class="flex items-center justify-between w-full">
 					<h4>
 						<span
-							>В корзине <b>{{ 3 }} товара</b></span
+							>В корзине <b>{{ items.length }} товара</b></span
 						>
 					</h4>
 					<button type="button" @click="close">
@@ -60,7 +68,11 @@ function close() {
 
 			<div class="overflow-auto flex-1 grow space-y-5">
 				<CartDrawerItem
+					v-if="!loading"
 					v-for="item in items"
+					:onClickCountButton="
+						type => onClickCountButton(item.id, item.quantity, type)
+					"
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"
@@ -74,6 +86,7 @@ function close() {
 					:quantity="item.quantity"
 					:price="item.price"
 				/>
+				<p v-else>Loading...</p>
 			</div>
 
 			<div class="py-8 px-10 bg-white">
