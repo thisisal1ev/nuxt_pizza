@@ -12,7 +12,7 @@ defineProps<CountButtonProps>()
 <template>
 	<div :class class="inline-flex items-center justify-between gap-3">
 		<CountIconButton
-			@click="onClick && onClick('minus')"
+			@click="onClick?.('minus')"
 			type="minus"
 			:disabled="quantity && quantity > 1 ? false : true"
 			:size
@@ -23,7 +23,7 @@ defineProps<CountButtonProps>()
 		}}</b>
 
 		<CountIconButton
-			@click="onClick && onClick('plus')"
+			@click="onClick?.('plus')"
 			type="plus"
 			:disabled="false"
 			:size

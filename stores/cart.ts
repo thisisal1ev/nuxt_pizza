@@ -19,7 +19,7 @@ export const useCartStore = defineStore('cartStore', {
 	}),
 
 	actions: {
-		async fetchCartItems() {
+		async fetchCartItems(): Promise<void> {
 			this.loading = true
 			this.error = false
 
@@ -53,7 +53,22 @@ export const useCartStore = defineStore('cartStore', {
 			}
 		},
 
-		async removeCartItem(id: number) { },
+		async removeCartItem(id: number) {
+			this.loading = true
+			this.error = false
+
+			try {
+				const data = await Api.cart.removeCartItem(id)
+				const details = getCartDetails(data)
+				this.items = details.items
+				this.totalAmount = details.totalAmount
+			} catch (error: any) {
+				this.error = true
+				console.error(error.message)
+			} finally {
+				this.loading = false
+			}
+		},
 
 		async addCartItem(values: CreateCartItemValues) { },
 	},

@@ -8,6 +8,7 @@ interface Props {
 	quantity: number
 	class?: string
 	onClickCountButton?: (type: 'plus' | 'minus') => void
+	onClickRemove?: () => void
 }
 
 defineProps<Props>()
@@ -23,12 +24,17 @@ defineProps<Props>()
 			<hr class="my-3" />
 
 			<div class="flex items-center justify-between">
-				<CountButton :onClick="onClickCountButton" :quantity :size="'sm'" />
+				<CountButton
+					:onClick="() => onClickCountButton"
+					:quantity
+					:size="'sm'"
+				/>
 
 				<div class="flex items-center gap-3">
 					<CartItemDetailsPrice :price />
 
 					<svg
+						@click="onClickRemove?.()"
 						xmlns="http://www.w3.org/2000/svg"
 						width="16"
 						height="16"

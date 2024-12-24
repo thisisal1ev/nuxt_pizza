@@ -7,7 +7,14 @@ defineProps<{
 	isVisible: boolean
 }>()
 
-const { fetchCartItems, totalAmount, items, loading } = useCartStore()
+const {
+	items,
+	totalAmount,
+	loading,
+	updateItemQuantity,
+	fetchCartItems,
+	removeCartItem,
+} = useCartStore()
 
 onMounted(async () => {
 	await fetchCartItems()
@@ -24,6 +31,8 @@ const onClickCountButton = (
 	quantity: number,
 	type: 'plus' | 'minus'
 ) => {
+	const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
+	updateItemQuantity(id, newQuantity)
 	console.log(id, quantity, type)
 }
 </script>
@@ -73,6 +82,7 @@ const onClickCountButton = (
 					:onClickCountButton="
 						type => onClickCountButton(item.id, item.quantity, type)
 					"
+					:onClickRemove="() => removeCartItem(item.id)"
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"
