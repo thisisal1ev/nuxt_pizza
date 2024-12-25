@@ -1,5 +1,5 @@
+import prisma from '~/lib/prisma'
 import { calcCartItemTotalPrice } from './calc-cart-item-total-amount'
-import prisma from './prisma'
 
 export const updateCartTotalAmount = async (token: string) => {
 	const userCart = await prisma.cart.findFirst({
@@ -9,49 +9,49 @@ export const updateCartTotalAmount = async (token: string) => {
 		include: {
 			items: {
 				orderBy: {
-					createdAt: 'desc'
+					createdAt: 'desc',
 				},
 				include: {
 					productItem: {
 						include: {
-							product: true
+							product: true,
 						},
 					},
-					ingredients: true
-				}
-			}
-		}
+					ingredients: true,
+				},
+			},
+		},
 	})
 
 	if (!userCart) {
 		return
 	}
 
-	const totalAmount = userCart?.items.reduce((acc, item) => {
+	const totalAmount = userCart.items.reduce((acc, item) => {
 		return acc + calcCartItemTotalPrice(item)
 	}, 0)
 
-	await prisma.cart.update({
+	return await prisma.cart.update({
 		where: {
 			id: userCart.id,
 		},
 		data: {
-			totalAmount
+			totalAmount,
 		},
 		include: {
 			items: {
 				orderBy: {
-					createdAt: 'desc'
+					createdAt: 'desc',
 				},
 				include: {
 					productItem: {
 						include: {
-							product: true
+							product: true,
 						},
 					},
-					ingredients: true
-				}
-			}
-		}
+					ingredients: true,
+				},
+			},
+		},
 	})
 }

@@ -16,6 +16,7 @@ defineProps<IconButtonProps>()
 		variant="outline"
 		type="button"
 		size="icon"
+		@click="onClick?.(type === 'minus' ? 'minus' : 'plus')"
 		:disabled
 		:class="[
 			size === 'sm'

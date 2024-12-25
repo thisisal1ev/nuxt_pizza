@@ -19,7 +19,7 @@ export const useCartStore = defineStore('cartStore', {
 	}),
 
 	actions: {
-		async fetchCartItems(): Promise<void> {
+		async fetchCartItems() {
 			this.loading = true
 			this.error = false
 

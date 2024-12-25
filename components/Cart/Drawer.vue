@@ -7,17 +7,10 @@ defineProps<{
 	isVisible: boolean
 }>()
 
-const {
-	items,
-	totalAmount,
-	loading,
-	updateItemQuantity,
-	fetchCartItems,
-	removeCartItem,
-} = useCartStore()
+const store = useCartStore()
 
 onMounted(async () => {
-	await fetchCartItems()
+	await store.fetchCartItems()
 })
 
 const emit = defineEmits(['close'])
@@ -32,8 +25,7 @@ const onClickCountButton = (
 	type: 'plus' | 'minus'
 ) => {
 	const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
-	updateItemQuantity(id, newQuantity)
-	console.log(id, quantity, type)
+	store.updateItemQuantity(id, newQuantity)
 }
 </script>
 
@@ -53,7 +45,10 @@ const onClickCountButton = (
 				<div class="flex items-center justify-between w-full">
 					<h4>
 						<span
-							>В корзине <b>{{ items.length }} товара</b></span
+							>В корзине
+							<b
+								>{{ !store.loading ? store.items.length : '...' }} товара</b
+							></span
 						>
 					</h4>
 					<button type="button" @click="close">
@@ -77,12 +72,12 @@ const onClickCountButton = (
 
 			<div class="overflow-auto flex-1 grow space-y-5">
 				<CartDrawerItem
-					v-if="!loading"
-					v-for="item in items"
+					v-if="!store.loading"
+					v-for="item in store.items"
 					:onClickCountButton="
 						type => onClickCountButton(item.id, item.quantity, type)
 					"
-					:onClickRemove="() => removeCartItem(item.id)"
+					:onClickRemove="() => store.removeCartItem(item.id)"
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"
@@ -96,7 +91,7 @@ const onClickCountButton = (
 					:quantity="item.quantity"
 					:price="item.price"
 				/>
-				<p v-else>Loading...</p>
+				<p class="px-10 font-medium text-base" v-else>Loading...</p>
 			</div>
 
 			<div class="py-8 px-10 bg-white">
@@ -108,7 +103,11 @@ const onClickCountButton = (
 								class="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2"
 							></span>
 						</div>
-						<b class="text-lg">{{ totalAmount }} &#8381;</b>
+						<b class="text-lg"
+							>{{
+								!store.loading ? store.totalAmount + '&nbsp;&#8381;' : '...'
+							}}
+						</b>
 					</div>
 
 					<NuxtLink to="/cart" class="inline-block w-full">

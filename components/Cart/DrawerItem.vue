@@ -24,11 +24,7 @@ defineProps<Props>()
 			<hr class="my-3" />
 
 			<div class="flex items-center justify-between">
-				<CountButton
-					:onClick="() => onClickCountButton"
-					:quantity
-					:size="'sm'"
-				/>
+				<CountButton :onClick="onClickCountButton" :quantity :size="'sm'" />
 
 				<div class="flex items-center gap-3">
 					<CartItemDetailsPrice :price />

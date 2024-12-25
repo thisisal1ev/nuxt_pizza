@@ -5,44 +5,42 @@ export default defineEventHandler(async (event) => {
 	try {
 		const id = Number(event.context.params?.id)
 		const body = await readBody(event)
-		const data = body as { quantity: number }
 		const token = getCookie(event, 'cartToken')
 
 		if (!token) {
 			return {
 				message: 'Cart token not found',
+				status: 401,
 			}
 		}
 
 		const cartItem = await prisma.cartItem.findFirst({
-			where: {
-				id,
-			},
+			where: { id },
 		})
 
 		if (!cartItem) {
 			return {
 				message: 'Cart item not found',
+				status: 404,
 			}
 		}
 
 		await prisma.cartItem.update({
-			where: {
-				id,
-			},
-			data: {
-				quantity: data.quantity,
-			},
+			where: { id },
+			data: { quantity: body.quantity },
 		})
 
 		const updatedUserCart = await updateCartTotalAmount(token)
 
-		return Response.json(updatedUserCart)
+		return {
+			items: updatedUserCart?.items,
+			totalAmount: updatedUserCart?.totalAmount,
+		}
 	} catch (error) {
 		console.error('[CART_PATCH] Server error', error)
 		return {
 			message: 'Не удалось обновить корзину',
-			status: 500
+			status: 500,
 		}
 	}
 })
