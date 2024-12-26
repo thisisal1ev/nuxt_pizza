@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@prisma/nuxt": "^0.0.35",
+		"@vueuse/motion": "^2.2.6",
 		"axios": "^1.7.7",
 		"bcrypt": "^5.1.1",
 		"nuxt": "^3.14.1592",

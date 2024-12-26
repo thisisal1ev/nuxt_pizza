@@ -36,8 +36,29 @@ const onClickCountButton = (
 		class="opacity-50 z-40 fixed bg-black top-0 left-0 w-full h-full"
 	></div>
 	<div
+		v-motion
+		:initial="{
+			x: 250,
+			transition: {
+				duration: 250,
+				delay: 0,
+			},
+		}"
+		:enter="{
+			x: 1,
+			transition: {
+				duration: 100,
+				delay: 0,
+			},
+		}"
+		:leave="{
+			x: 250,
+			transition: {
+				duration: 250,
+				delay: 0,
+			},
+		}"
 		v-if="isVisible"
-		:class="isVisible ? 'translate-x-0' : 'translate-x-full'"
 		class="fixed top-0 right-0 outline-none w-1/4 z-50 bg-[#f1f4ee] overscroll-none transform duration-500 h-screen"
 	>
 		<div class="flex flex-col h-full justify-between">

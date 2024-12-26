@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     "@prisma/nuxt",
     '@vueuse/nuxt',
+    '@vueuse/motion/nuxt'
   ],
 
   pinia: {
