@@ -33,6 +33,10 @@ export default defineEventHandler(async (event) => {
 
 		return Response.json(userCart)
 	} catch (e: any) {
-		console.log(e.message)
+		console.log('[CART_GET] Server error', e)
+		return {
+			message: 'Не удалось получить корзину',
+			status: 500
+		}
 	}
 })

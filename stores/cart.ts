@@ -70,6 +70,21 @@ export const useCartStore = defineStore('cartStore', {
 			}
 		},
 
-		async addCartItem(values: CreateCartItemValues) { },
+		async addCartItem(values: CreateCartItemValues) {
+			this.loading = true
+			this.error = false
+
+			try {
+				const data = await Api.cart.addCartItem(values)
+				const details = getCartDetails(data)
+				this.items = details.items
+				this.totalAmount = details.totalAmount
+			} catch (error: any) {
+				this.error = true
+				console.error(error.message)
+			} finally {
+				this.loading = false
+			}
+		},
 	},
 })
