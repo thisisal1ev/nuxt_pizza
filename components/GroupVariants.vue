@@ -19,7 +19,7 @@ defineProps<Props>()
 		<button
 			v-for="item in items"
 			:key="item.name"
-			@click="() => onClick?.(item.value)"
+			@click="onClick?.(item.value)"
 			:class="[
 				'flex items-center justify-center cursor-pointer h-[30px] px-5 flex-1 rounded-3xl transition-all duration-400 text-sm',
 				{
