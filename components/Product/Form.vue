@@ -56,13 +56,18 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 			/>
 		</div>
 
-		<div className="bg-[#f7f6f5] p-7">
+		<div class="bg-[#f7f6f5] p-7 w-[450px]">
 			<h3 class="font-extrabold mb-5">{{ product.name }}</h3>
 
 			<Button
 				:disabled="cartStore.loading"
-				@click="onSubmit()"
-				class="px-10 text-base rounded-[18px] mt-10"
+				@click="
+					onSubmit(
+						product.id,
+						product.ingredients.map(i => i.id)
+					)
+				"
+				class="px-10 text-base rounded-[18px] mt-10 w-full h-12"
 			>
 				Добавить в корзину за {{ firstItem.price }} &#8381;
 			</Button>
