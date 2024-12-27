@@ -21,7 +21,8 @@
 		"prisma": "^5.19.1",
 		"qs": "^6.13.1",
 		"vue": "latest",
-		"vue-router": "latest"
+		"vue-router": "latest",
+		"vue3-toastify": "^0.2.8"
 	},
 	"devDependencies": {
 		"@nuxt/fonts": "^0.7.2",

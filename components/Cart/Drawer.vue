@@ -102,7 +102,7 @@ const onClickCountButton = (
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"
-					:imageURL="item.imageUrl"
+					:imgURL="item.imgURL"
 					:name="item.name"
 					:details="
 						item.pizzaType && item.pizzaSize

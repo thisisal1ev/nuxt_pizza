@@ -2,6 +2,7 @@
 interface Props {
 	imgURL: string
 	size: number
+	name: string
 }
 
 const { size } = defineProps<Props>()
@@ -20,7 +21,7 @@ const computedImageClass = computed(() => {
 
 <template>
 	<div class="flex items-center justify-center flex-1 relative w-full">
-		<img :src="imgURL" alt="Logo" :class="computedImageClass" />
+		<img :src="imgURL" :alt="name" :class="computedImageClass" />
 
 		<div
 			class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed border-2 rounded-full border-gray-200 w-[450px] h-[450px]"

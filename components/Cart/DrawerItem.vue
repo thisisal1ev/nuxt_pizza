@@ -2,7 +2,7 @@
 interface Props {
 	id: number
 	details: string
-	imageURL: string
+	imgURL: string
 	name: string
 	price: number
 	quantity: number
@@ -16,7 +16,7 @@ defineProps<Props>()
 
 <template>
 	<div class="flex w-full bg-white gap-6" :class>
-		<CartItemDetailsImage :src="imageURL" />
+		<CartItemDetailsImage :src="imgURL" />
 
 		<div class="flex-1">
 			<CartItemDetailsInfo :details :name />

@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-type Variants = {
+export type Variant = {
 	name: string
 	value: string
 	disabled?: boolean
 }
 
 interface Props {
-	items: readonly Variants[]
-	defaultValue?: string
-	onClick?: (value: Variants['value']) => void
-	selectedValue?: Variants['value']
+	items: readonly Variant[]
+	onClick?: (value: Variant['value']) => void
+	value?: Variant['value']
 }
 
 defineProps<Props>()
@@ -20,11 +19,11 @@ defineProps<Props>()
 		<button
 			v-for="item in items"
 			:key="item.name"
-			@click="onClick?.(item.value)"
+			@click="() => onClick?.(item.value)"
 			:class="[
 				'flex items-center justify-center cursor-pointer h-[30px] px-5 flex-1 rounded-3xl transition-all duration-400 text-sm',
 				{
-					'bg-white shadow': item.value === selectedValue,
+					'bg-white shadow': item.value === value,
 					'text-gray-500 opacity-50 pointer-events-none': item.disabled,
 				},
 			]"
