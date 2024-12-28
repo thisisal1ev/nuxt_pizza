@@ -54,13 +54,13 @@ const handleClickAdd = () => {
 				<GroupVariants
 					:items="availableSizes"
 					:value="String(size)"
-					:onClick="(value) => setSize(Number(value) as PizzaSize)"
+					@on-click="(value) => setSize(Number(value) as PizzaSize)"
 				/>
 
 				<GroupVariants
 					:items="pizzaTypes"
 					:value="String(type)"
-					:onClick="(value) => setType(Number(value) as PizzaType)"
+					@on-click="(value) => setType(Number(value) as PizzaType)"
 				/>
 			</div>
 
