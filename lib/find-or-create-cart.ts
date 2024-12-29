@@ -1,6 +1,7 @@
+import type { Cart } from '@prisma/client'
 import prisma from './prisma'
 
-export const findOrCreateCart = async (token: string) => {
+export const findOrCreateCart = async (token: string): Promise<Cart> => {
 	let userCart = await prisma.cart.findFirst({
 		where: {
 			token,

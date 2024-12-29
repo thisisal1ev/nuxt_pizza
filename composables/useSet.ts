@@ -1,7 +1,5 @@
-import type { ShallowReactive } from 'vue'
-
 interface ReturnProps<T> {
-	set: ShallowReactive<Set<T>>
+	set: Set<T>
 	toggle: (value: T) => void
 	add: (value: T) => void
 	remove: (value: T) => void
@@ -11,7 +9,6 @@ interface ReturnProps<T> {
 
 export function useSet<T>(initialValues: T[] = []): ReturnProps<T> {
 	const set = shallowReactive(new Set<T>(initialValues))
-
 	const add = (value: T) => set.add(value)
 	const remove = (value: T) => set.delete(value)
 	const has = (value: T) => set.has(value)

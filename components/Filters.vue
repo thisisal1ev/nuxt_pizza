@@ -17,7 +17,7 @@ watchEffect(() => {
 	}))
 })
 
-const updatePrice = (prices: number[]) => {
+const updatePrice = (prices: number[]): void => {
 	filter.setPrice('priceFrom', prices[0])
 	filter.setPrice('priceTo', prices[1])
 }

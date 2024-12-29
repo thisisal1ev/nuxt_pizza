@@ -19,7 +19,7 @@ export const calcTotalPizzaPrice = (
 	items: ProductItem[],
 	ingredients: Ingredient[],
 	selectedIngredients: Set<number>,
-) => {
+): number => {
 	const pizzaPrice =
 		items.find((item) => item.pizzaType === type.value && item.size === size.value)?.price || 0
 

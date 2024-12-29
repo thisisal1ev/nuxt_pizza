@@ -18,7 +18,7 @@ defineProps<Props>()
 			><div class="inline-flex items-center relative rounded-lg bg-slate-200">
 				<input
 					:checked="checked ?? false"
-					@change="onCheckedChange?.() ?? ''"
+					@change="onCheckedChange?.(checked || Boolean(value))"
 					:value="value"
 					:id="`checkbox-${String(name)}-${String(value)}`"
 					type="checkbox"

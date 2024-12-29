@@ -1,8 +1,10 @@
 <script lang="ts" setup>
-defineProps<{
+interface Props {
 	price: number
 	class?: string
-}>()
+}
+
+defineProps<Props>()
 </script>
 
 <template>

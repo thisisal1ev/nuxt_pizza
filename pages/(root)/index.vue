@@ -1,11 +1,7 @@
 <script lang="ts" setup>
-import type { Product } from '@prisma/client'
+import type { Product, Category } from '@prisma/client'
 
-interface Category {
-	id: number
-	name: string
-	createdAt: Date
-	updatedAt: Date
+interface Categories extends Category {
 	products: Product[]
 }
 
@@ -13,7 +9,7 @@ const { data } = await useAsyncData('categories', () =>
 	$fetch('/api/categories')
 )
 const filteredCategories = data.value?.filter(
-	(category: Category) => category.products.length > 0
+	(category: Categories) => category.products.length > 0
 )
 </script>
 

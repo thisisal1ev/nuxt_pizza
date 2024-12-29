@@ -1,12 +1,11 @@
 import { mapPizzaType, type PizzaSize, type PizzaType } from '~/constants/pizza'
-import type { CartItemState } from './get-cart-details'
+import type { CartStateItem } from './get-cart-details'
 
 export const getCartItemDetails = (
-	ingredients: CartItemState['ingredients'],
+	ingredients: CartStateItem['ingredients'],
 	pizzaType: PizzaType,
 	pizzaSize: PizzaSize,
 ): string => {
-
 	const details = ref<string[]>([])
 
 	if (pizzaSize && pizzaType) {

@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 		const token = getCookie(event, 'cartToken')
 
 		if (!token) {
-			return Response.json({ totalAmount: 0, item: [] })
+			return { totalAmount: 0, item: [] }
 		}
 
 		const userCart = await prisma.cart.findMany({
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
 			}
 		})
 
-		return Response.json(userCart)
+		return userCart
 	} catch (e: any) {
 		console.log('[CART_GET] Server error', e)
 		return {

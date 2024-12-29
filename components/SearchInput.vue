@@ -8,11 +8,11 @@ const focused = ref<boolean>(false)
 const products = ref<Product[]>([])
 const elementRef = ref<null | VNodeRef>(null)
 
-onClickOutside(elementRef, () => {
+onClickOutside(elementRef, (): void => {
 	focused.value = false
 })
 
-const debouncedSearch = useDebounceFn(async () => {
+const debouncedSearch = useDebounceFn(async (): Promise<void> => {
 	try {
 		const response = await Api.products.search(searchQuery.value)
 		products.value = response
@@ -25,7 +25,7 @@ watchEffect(() => {
 	debouncedSearch()
 })
 
-const onClickItem = () => {
+const onClickItem = (): void => {
 	focused.value = false
 	searchQuery.value = ''
 	products.value = []
