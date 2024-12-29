@@ -33,10 +33,6 @@ const { totalPrice, textDetails } = getPizzaDetails(
 	selectedIngredients
 )
 
-watchEffect(() => {
-	console.log(size.value, type.value, selectedIngredients)
-})
-
 const handleClickAdd = () => {
 	if (currentItemId.value) {
 		onSubmit(currentItemId.value, Array.from(selectedIngredients))
