@@ -33,9 +33,15 @@ const { totalPrice, textDetails } = getPizzaDetails(
 	selectedIngredients
 )
 
+const ingredientsList = ref<number[]>([])
+
+watchEffect(() => {
+	ingredientsList.value = Array.from(selectedIngredients)
+})
+
 const handleClickAdd = () => {
 	if (currentItemId.value) {
-		onSubmit(currentItemId.value, Array.from(selectedIngredients))
+		onSubmit(currentItemId.value, ingredientsList.value)
 	}
 }
 </script>
@@ -81,7 +87,7 @@ const handleClickAdd = () => {
 
 			<Button
 				:disabled="loading"
-				@click="handleClickAdd"
+				@click="handleClickAdd()"
 				class="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
 			>
 				Добавить в корзину за {{ totalPrice }} &#8381;
