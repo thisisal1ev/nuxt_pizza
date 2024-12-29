@@ -7,7 +7,6 @@ export type Variant = {
 
 interface Props {
 	items: readonly Variant[]
-	onClick?: (value: Variant['value']) => void
 	value?: Variant['value']
 }
 

@@ -12,15 +12,16 @@ import type { PizzaSize, PizzaType } from '../constants/pizza'
  *
  * @returns number общую стоимость
  */
+
 export const calcTotalPizzaPrice = (
-	type: PizzaType,
-	size: PizzaSize,
+	type: Ref<PizzaType>,
+	size: Ref<PizzaSize>,
 	items: ProductItem[],
 	ingredients: Ingredient[],
 	selectedIngredients: Set<number>,
 ) => {
 	const pizzaPrice =
-		items.find((item) => item.pizzaType === type && item.size === size)?.price || 0
+		items.find((item) => item.pizzaType === type.value && item.size === size.value)?.price || 0
 
 	const totalIngredientsPrice = ingredients
 		.filter((ingredient) => selectedIngredients.has(ingredient.id))

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { toast } from 'vue3-toastify'
 import type { PizzaSize, PizzaType } from '~/constants/pizza'
 import { getCartItemDetails } from '~/lib/get-cart-item-details'
 import { useCartStore } from '~/stores/cart'
@@ -26,6 +27,26 @@ const onClickCountButton = (
 ) => {
 	const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
 	store.updateItemQuantity(id, newQuantity)
+}
+
+function removeCartItem(id: number, name: string) {
+	try {
+		store.removeCartItem(id)
+
+		toast.success(`${name} удалена из корзины`, {
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	} catch (e: any) {
+		console.error(e.message)
+
+		toast.error('Не удалось удалить товар из корзины', {
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	}
 }
 </script>
 
@@ -98,7 +119,7 @@ const onClickCountButton = (
 					:onClickCountButton="
 						type => onClickCountButton(item.id, item.quantity, type)
 					"
-					:onClickRemove="() => store.removeCartItem(item.id)"
+					:onClickRemove="() => removeCartItem(item.id, item.name)"
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"

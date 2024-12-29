@@ -12,6 +12,7 @@ function toggle() {
 		<CartDrawer :isVisible @close="toggle" />
 	</Teleport>
 	<Button
+		:disabled="cartStore.loading"
 		@click="isVisible = !isVisible"
 		variant="default"
 		size="default"

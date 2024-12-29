@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Ingredient, ProductItem } from '@prisma/client'
-import type { Variant } from '~/components/GroupVariants.vue'
 import { pizzaTypes, type PizzaSize, type PizzaType } from '~/constants/pizza'
 import { getPizzaDetails } from '~/lib/get-pizza-details'
 
@@ -27,12 +26,16 @@ const {
 } = usePizzaOptions(items)
 
 const { totalPrice, textDetails } = getPizzaDetails(
-	type.value,
-	size.value,
+	type,
+	size,
 	items,
 	ingredients,
 	selectedIngredients
 )
+
+watchEffect(() => {
+	console.log(size.value, type.value, selectedIngredients)
+})
 
 const handleClickAdd = () => {
 	if (currentItemId.value) {

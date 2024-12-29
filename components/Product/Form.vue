@@ -29,9 +29,15 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 
 		toast.success(`${product.name} добавлена в корзину`, {
 			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
 		})
 	} catch (e: any) {
-		toast.error('Не удалось добавить товар в корзину')
+		toast.error('Не удалось добавить товар в корзину', {
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
 		console.log(e)
 	}
 }
