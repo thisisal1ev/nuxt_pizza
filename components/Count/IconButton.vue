@@ -18,6 +18,7 @@ defineProps<IconButtonProps>()
 		size="icon"
 		@click="onClick?.(type === 'minus' ? 'minus' : 'plus')"
 		:disabled
+		:isIcon="true"
 		:class="[
 			size === 'sm'
 				? 'w-[30px] h-[30px] rounded-[10px]'

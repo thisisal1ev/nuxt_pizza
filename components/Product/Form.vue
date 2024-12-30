@@ -21,7 +21,6 @@ const isPizza = Boolean(firstItem.pizzaType)
 const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 	try {
 		const itemId = productItemId ?? firstItem.id
-		console.log(productItemId, ingredients)
 
 		await cartStore.addCartItem({
 			productItemId: itemId,

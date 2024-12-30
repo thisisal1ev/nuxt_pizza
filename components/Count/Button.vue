@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 export interface CountButtonProps {
-	quantity?: number
+	quantity: number
 	size?: 'sm' | 'lg'
 	class?: string
 }
@@ -14,7 +14,7 @@ defineEmits(['onClick'])
 		<CountIconButton
 			@click="$emit('onClick', 'minus')"
 			type="minus"
-			:disabled="quantity && quantity > 1 ? false : true"
+			:disabled="quantity === 1"
 			:size
 		/>
 
