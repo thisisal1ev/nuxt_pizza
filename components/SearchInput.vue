@@ -12,17 +12,17 @@ onClickOutside(elementRef, (): void => {
 	focused.value = false
 })
 
-const debouncedSearch = useDebounceFn(async (): Promise<void> => {
+const debouncedSearch = useDebounceFn(async (query: string): Promise<void> => {
 	try {
-		const response = await Api.products.search(searchQuery.value)
+		const response = await Api.products.search(query)
 		products.value = response
 	} catch (error: any) {
 		console.error('Error:', error?.message)
 	}
-}, 250)
+}, 100)
 
 watchEffect(() => {
-	debouncedSearch()
+	debouncedSearch(searchQuery.value)
 })
 
 const onClickItem = (): void => {

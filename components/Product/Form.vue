@@ -15,12 +15,13 @@ interface Props {
 const { product } = defineProps<Props>()
 
 const cartStore = useCartStore()
-const firstItem = product?.items[0]
-const isPizza = Boolean(firstItem?.pizzaType)
+const firstItem = product.items[0]
+const isPizza = Boolean(firstItem.pizzaType)
 
 const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 	try {
-		const itemId = productItemId || firstItem?.id
+		const itemId = productItemId ?? firstItem.id
+		console.log(productItemId, ingredients)
 
 		await cartStore.addCartItem({
 			productItemId: itemId,
@@ -38,7 +39,7 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
-		console.log(e)
+		console.error(e.message)
 	}
 }
 </script>
@@ -51,7 +52,7 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 		:ingredients="product.ingredients"
 		:items="product.items"
 		:loading="cartStore.loading"
-		:onSubmit="() => onSubmit()"
+		@handleClickAdd="onSubmit"
 	/>
 	<div v-else class="flex justify-evenly flex-1">
 		<div class="flex items-center">
@@ -67,12 +68,7 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 
 			<Button
 				:disabled="cartStore.loading"
-				@click="
-					onSubmit(
-						product.id,
-						product.ingredients.map(i => i.id)
-					)
-				"
+				@click="onSubmit()"
 				class="px-10 text-base rounded-[18px] mt-10 w-full h-12"
 			>
 				Добавить в корзину за {{ firstItem.price }} &#8381;

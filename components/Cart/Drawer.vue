@@ -2,23 +2,16 @@
 import { toast } from 'vue3-toastify'
 import type { PizzaSize, PizzaType } from '~/constants/pizza'
 import { getCartItemDetails } from '~/lib/get-cart-item-details'
-import { useCartStore } from '~/stores/cart'
+import Id from '~/pages/(root)/product/[id].vue'
 
 defineProps<{
 	isVisible: boolean
 }>()
 
 const store = useCartStore()
-
-onMounted(async () => {
-	await store.fetchCartItems()
-})
+onMounted(async () => await store.fetchCartItems())
 
 const emit = defineEmits(['close'])
-
-function close() {
-	emit('close')
-}
 
 const onClickCountButton = (
 	id: number,
@@ -53,7 +46,7 @@ function removeCartItem(id: number, name: string) {
 <template>
 	<div
 		v-if="isVisible"
-		@click="close"
+		@click="$emit('close')"
 		class="opacity-50 z-40 fixed bg-black top-0 left-0 w-full h-full"
 	></div>
 	<div
@@ -93,7 +86,7 @@ function removeCartItem(id: number, name: string) {
 							></span
 						>
 					</h4>
-					<button type="button" @click="close">
+					<button type="button" @click="$emit('close')">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -116,10 +109,10 @@ function removeCartItem(id: number, name: string) {
 				<CartDrawerItem
 					v-if="!store.loading"
 					v-for="item in store.items"
-					:onClickCountButton="
-						type => onClickCountButton(item.id, item.quantity, type)
+					@onClickCountButton="
+						(id, quantity, type) => onClickCountButton(id, quantity, type)
 					"
-					:onClickRemove="() => removeCartItem(item.id, item.name)"
+					@onClickRemove="() => removeCartItem(item.id, item.name)"
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"

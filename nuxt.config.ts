@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   ],
 
   pinia: {
-    storesDirs: ['./stores/**'],
+    storesDirs: ['./store/**'],
   },
 
   prisma: {

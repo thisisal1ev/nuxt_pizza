@@ -8,11 +8,11 @@ interface Props {
 	name: string
 	ingredients: Ingredient[]
 	items: ProductItem[]
-	onSubmit: (itemId: number, ingredients: number[]) => void
 	loading?: boolean
 }
 
-const { items, ingredients, onSubmit } = defineProps<Props>()
+const { items, ingredients } = defineProps<Props>()
+defineEmits(['handleClickAdd'])
 
 const {
 	size,
@@ -34,16 +34,12 @@ const { totalPrice, textDetails } = getPizzaDetails(
 )
 
 const ingredientsList = ref<number[]>([])
+const currentId = ref<number>()
 
 watchEffect(() => {
 	ingredientsList.value = Array.from(selectedIngredients)
+	currentId.value = currentItemId.value
 })
-
-const handleClickAdd = () => {
-	if (currentItemId.value) {
-		onSubmit(currentItemId.value, ingredientsList.value)
-	}
-}
 </script>
 
 <template>
@@ -59,13 +55,13 @@ const handleClickAdd = () => {
 				<GroupVariants
 					:items="availableSizes"
 					:value="String(size)"
-					@on-click="(value) => setSize(Number(value) as PizzaSize)"
+					@onClick="(value) => setSize(Number(value) as PizzaSize)"
 				/>
 
 				<GroupVariants
 					:items="pizzaTypes"
 					:value="String(type)"
-					@on-click="(value) => setType(Number(value) as PizzaType)"
+					@onClick="(value) => setType(Number(value) as PizzaType)"
 				/>
 			</div>
 
@@ -87,7 +83,7 @@ const handleClickAdd = () => {
 
 			<Button
 				:disabled="loading"
-				@click="handleClickAdd()"
+				@click="$emit('handleClickAdd', currentId, ingredientsList)"
 				class="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
 			>
 				Добавить в корзину за {{ totalPrice }} &#8381;

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useCategoryStore } from '~/stores/category'
 import type { Category } from '@prisma/client'
 
 defineProps<{

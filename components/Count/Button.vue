@@ -3,16 +3,16 @@ export interface CountButtonProps {
 	quantity?: number
 	size?: 'sm' | 'lg'
 	class?: string
-	onClick?: (type: 'plus' | 'minus') => void
 }
 
 defineProps<CountButtonProps>()
+defineEmits(['onClick'])
 </script>
 
 <template>
 	<div :class class="inline-flex items-center justify-between gap-3">
 		<CountIconButton
-			@click="onClick?.('minus')"
+			@click="$emit('onClick', 'minus')"
 			type="minus"
 			:disabled="quantity && quantity > 1 ? false : true"
 			:size
@@ -23,7 +23,7 @@ defineProps<CountButtonProps>()
 		}}</b>
 
 		<CountIconButton
-			@click="onClick?.('plus')"
+			@click="$emit('onClick', 'plus')"
 			type="plus"
 			:disabled="false"
 			:size
