@@ -87,5 +87,14 @@ const onClickItem = (): void => {
 				<span>{{ product.name }}</span>
 			</NuxtLink>
 		</div>
+		<div
+			v-else
+			:class="focused ? 'visible opacity-100 top-12' : 'invisible top-14'"
+			class="absolute w-full bg-white rounded-xl py-2 opacity-0 shadow-md transition-all duration-200 z-30"
+		>
+			<p class="flex items-center gap-3 w-full px-3 py-2 hover:bg-primary/10">
+				Ничего не найдено
+			</p>
+		</div>
 	</label>
 </template>
