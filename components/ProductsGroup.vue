@@ -1,22 +1,13 @@
 <script lang="ts" setup>
-interface IPrices {
-	price: number
-}
-
-interface IProduct {
-	id: number
-	name: string
-	items: IPrices[]
-	imgURL: string
-}
+import type { ProductWithRelations } from './Product/Form.vue'
 
 interface Props {
 	title: string
 	categoryId: number
-	products: IProduct[]
+	products: ProductWithRelations[]
 }
 
-const props = defineProps<Props>()
+const { products, categoryId } = defineProps<Props>()
 
 const target = ref<HTMLElement | null>(null)
 const store = useCategoryStore()
@@ -30,7 +21,7 @@ const intersection = useIntersectionObserver(
 		if (entry[0].isIntersecting) {
 			watchEffect(() => {
 				if (intersection?.isActive) {
-					store.setActiveId(props.categoryId)
+					store.setActiveId(categoryId)
 				}
 			})
 		}
@@ -54,6 +45,7 @@ const intersection = useIntersectionObserver(
 				:name="product.name"
 				:imgURL="product.imgURL"
 				:price="product.items[0].price"
+				:ingredients="product.ingredients"
 			/>
 		</div>
 	</section>

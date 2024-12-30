@@ -3,7 +3,7 @@ import type { Ingredient, Product, ProductItem } from '@prisma/client'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
-type ProductWithRelations = Product & {
+export type ProductWithRelations = Product & {
 	items: ProductItem[]
 	ingredients: Ingredient[]
 }

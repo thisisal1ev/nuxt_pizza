@@ -1,15 +1,12 @@
 <script lang="ts" setup>
-import type { Product, Category } from '@prisma/client'
-
-interface Categories extends Category {
-	products: Product[]
-}
+import type { ProductWithRelations } from '~/components/Product/Form.vue'
 
 const { data } = await useAsyncData('categories', () =>
 	$fetch('/api/categories')
 )
+
 const filteredCategories = data.value?.filter(
-	(category: Categories) => category.products.length > 0
+	(category: ProductWithRelations) => category.products.length > 0
 )
 </script>
 

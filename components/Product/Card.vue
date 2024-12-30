@@ -1,12 +1,16 @@
 <script lang="ts" setup>
+import type { Ingredient } from '@prisma/client'
+
 interface Props {
 	id: number
 	name: string
 	price: number
 	imgURL: string
+	ingredients: Ingredient[]
 }
 
-defineProps<Props>()
+const { ingredients } = defineProps<Props>()
+const productDetails = ingredients.map(ingredient => ingredient.name).join(', ')
 </script>
 
 <template>
@@ -19,9 +23,8 @@ defineProps<Props>()
 
 		<h4 class="mt-3 mb-1 font-bold leading-8">{{ name }}</h4>
 
-		<p class="text-sm text-gray-400">
-			Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус
-			альфредо, чеснок
+		<p v-if="productDetails" class="text-sm text-gray-400">
+			{{ productDetails }}
 		</p>
 
 		<div class="flex justify-between items-center mt-4">
