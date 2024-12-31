@@ -2,7 +2,6 @@
 import { toast } from 'vue3-toastify'
 import type { PizzaSize, PizzaType } from '~/constants/pizza'
 import { getCartItemDetails } from '~/lib/get-cart-item-details'
-import Id from '~/pages/(root)/product/[id].vue'
 
 defineProps<{
 	isVisible: boolean

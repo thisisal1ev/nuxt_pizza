@@ -34,7 +34,7 @@ function removeCartItem(id: number) {
 			<div class="flex flex-col gap-10 flex-1 mb-20">
 				<WhiteBlock title="1. Корзина">
 					<template #lower>
-						<div class="space-y-5" v-if="!store.loading">
+						<div class="space-y-5" v-if="!store.loading && store.items.length">
 							<CheckoutItem
 								v-for="item in store.items"
 								:key="item.id"
@@ -52,12 +52,13 @@ function removeCartItem(id: number) {
 								@onClickRemove="id => removeCartItem(id)"
 							/>
 						</div>
-						<div class="space-y-5" v-else>
+						<div class="space-y-5" v-else-if="store.loading">
 							<SkeletonCheckoutItem
 								v-for="i in store.items.length ? store.items.length : 3"
 								:key="i"
 							/>
 						</div>
+						<p v-else class="text-lg font-semibold">Корзина пуста</p>
 					</template>
 				</WhiteBlock>
 
@@ -65,27 +66,27 @@ function removeCartItem(id: number) {
 					<template #lower>
 						<div class="grid grid-cols-2 gap-5">
 							<Input
-								class="text-base"
+								class="text-base border-2 transition-colors duration-300 focus:border-primary"
 								name="firstName"
 								type="text"
 								placeholder="Имя"
 							/>
 							<Input
-								class="text-base"
+								class="text-base border-2 transition-colors duration-300 focus:border-primary"
 								name="lastName"
 								type="text"
 								placeholder="Фамилия"
 							/>
 							<Input
-								class="text-base"
+								class="text-base border-2 transition-colors duration-300 focus:border-primary"
 								name="email"
-								type="text"
+								type="email"
 								placeholder="E-Mail"
 							/>
 							<Input
-								class="text-base"
+								class="text-base border-2 transition-colors duration-300 focus:border-primary"
 								name="phone"
-								type="text"
+								type="tel"
 								placeholder="Телефон"
 							/>
 						</div>
@@ -96,13 +97,13 @@ function removeCartItem(id: number) {
 					<template #lower>
 						<div class="flex flex-col gap-5">
 							<Input
+								class="text-base border-2 transition-colors duration-300 focus:border-primary"
 								name="firstName"
-								class="text-base"
 								type="text"
 								placeholder="Имя"
 							/>
 							<Textarea
-								class="text-base"
+								class="text-base border-2 transition-colors duration-300 focus:border-primary"
 								placeholder="Комментарий к заказу"
 								rows="5"
 								name="Comment to address"
@@ -150,7 +151,7 @@ function removeCartItem(id: number) {
 							></template>
 						</CheckoutItemDetails>
 
-						<CheckoutItemDetails title="Налоги:" value="3000 &#8381;">
+						<CheckoutItemDetails title="Налоги:" value="0 &#8381;">
 							<template #icon>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +172,7 @@ function removeCartItem(id: number) {
 							</template>
 						</CheckoutItemDetails>
 
-						<CheckoutItemDetails title="Доставка:" value="3000 &#8381;">
+						<CheckoutItemDetails title="Доставка:" value="0 &#8381;">
 							<template #icon>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"

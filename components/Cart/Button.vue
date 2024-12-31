@@ -16,7 +16,7 @@ function toggle() {
 		@click="isVisible = !isVisible"
 		variant="default"
 		size="default"
-		class="relative group"
+		class="relative group w-[105px]"
 	>
 		<b v-if="!cartStore.loading">{{ cartStore.totalAmount }} &#8381;</b>
 		<div v-else class="flex items-center space-x-2">
