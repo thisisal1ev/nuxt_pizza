@@ -75,7 +75,10 @@ function removeCartItem(id: number, name: string) {
 		v-if="isVisible"
 		class="fixed top-0 right-0 outline-none w-1/4 z-50 bg-[#f1f4ee] overscroll-none transform duration-500 h-screen"
 	>
-		<div class="flex flex-col h-full justify-between">
+		<div
+			v-if="store.items.length > 0"
+			class="flex flex-col h-full justify-between"
+		>
 			<div class="flex flex-col items-start p-10">
 				<div class="flex items-center justify-between w-full">
 					<h4>
@@ -165,6 +168,41 @@ function removeCartItem(id: number, name: string) {
 							</svg>
 						</Button>
 					</NuxtLink>
+				</div>
+			</div>
+		</div>
+
+		<div v-else class="flex flex-col h-full justify-between">
+			<div class="grow flex-1 flex flex-col items-center justify-center">
+				<img width="120" height="120" src="/empty-box.png" alt="empty box" />
+				<div class="flex flex-col items-center space-y-4">
+					<h4 class="text-center font-bold">Корзина пустая</h4>
+					<p className="text-center text-neutral-500">
+						Добавьте хотя бы одну пиццу, чтобы совершить заказ
+					</p>
+					<Button
+						@click="$emit('close')"
+						class="w-56 h-12 text-base rounded-xl"
+						size="lg"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							class="w-5 mr-2"
+						>
+							<path d="m12 19-7-7 7-7" />
+							<path d="M19 12H5" />
+						</svg>
+
+						Вернуться назад
+					</Button>
 				</div>
 			</div>
 		</div>

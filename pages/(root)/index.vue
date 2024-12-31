@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { ProductWithRelations } from '~/components/Product/Form.vue'
 
-const { data } = await useAsyncData('categories', () =>
+const { data: categories } = await useAsyncData('categories', () =>
 	$fetch('/api/categories')
 )
 
-const filteredCategories = data.value?.filter(
+const filteredCategories = categories.value?.filter(
 	(category: ProductWithRelations) => category.products.length > 0
 )
 </script>
@@ -27,8 +27,8 @@ const filteredCategories = data.value?.filter(
 				<div class="flex-1">
 					<div class="flex flex-col gap-16">
 						<ProductsGroup
-							v-if="data !== undefined"
-							v-for="category in data"
+							v-if="categories !== undefined"
+							v-for="category in categories"
 							:categoryId="category.id"
 							:title="category.name"
 							:key="category.id"
