@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 interface Props {
 	value: number
-	endAdornment?: string
 	onCheckedChange?: (checked: boolean) => void
 	checked?: boolean
 	name?: string
@@ -47,6 +46,5 @@ defineProps<Props>()
 				<slot />
 			</span>
 		</label>
-		{{ endAdornment }}
 	</div>
 </template>

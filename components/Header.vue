@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+interface Props {
+	hasSearch?: boolean
+	hasCart?: boolean
+}
+
+defineProps<Props>()
+</script>
+
 <template>
 	<header class="py-10 border-b-2">
 		<div class="container flex items-center justify-between space-x-10">
@@ -17,7 +26,7 @@
 				</div>
 			</NuxtLink>
 
-			<div class="mx-10 flex-1">
+			<div v-if="!hasSearch" class="mx-10 flex-1">
 				<SearchInput />
 			</div>
 
@@ -40,7 +49,7 @@
 					<span>Войти</span>
 				</Button>
 
-				<CartButton />
+				<CartButton v-if="!hasCart" />
 			</div>
 		</div>
 	</header>
