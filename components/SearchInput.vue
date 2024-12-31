@@ -59,8 +59,8 @@ const onClickItem = (): void => {
 			<path d="m21 21-4.3-4.3" />
 		</svg>
 
-		<input
-			class="outline-none w-full rounded-2xl bg-gray-100 pl-11"
+		<Input
+			class="outline-none w-full !rounded-2xl border-none bg-gray-100 pl-11"
 			type="search"
 			v-model.trim="searchQuery"
 			placeholder="Поиск пиццы..."

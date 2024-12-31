@@ -2,6 +2,28 @@
 definePageMeta({
 	layout: 'checkout-layout',
 })
+
+const store = useCartStore()
+if (store.items.length === 0) {
+	onMounted(async () => await store.fetchCartItems())
+}
+
+const onClickCountButton = (
+	id: number,
+	quantity: number,
+	type: 'plus' | 'minus'
+) => {
+	const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
+	store.updateItemQuantity(id, newQuantity)
+}
+
+function removeCartItem(id: number) {
+	try {
+		store.removeCartItem(id)
+	} catch (e: any) {
+		console.error(e.message)
+	}
+}
 </script>
 
 <template>
@@ -11,31 +33,56 @@ definePageMeta({
 		<div class="flex gap-10">
 			<div class="flex flex-col gap-10 flex-1 mb-20">
 				<WhiteBlock title="1. Корзина">
-					<template #lower>12412434234</template>
+					<template #lower>
+						<div class="space-y-5" v-if="!store.loading">
+							<CheckoutItem
+								v-for="item in store.items"
+								:key="item.id"
+								:id="item.id"
+								:imgURL="item.imgURL"
+								:name="item.name"
+								:quantity="item.quantity"
+								:price="item.price"
+								:details="
+									item.ingredients.map(ingredient => ingredient.name).join(', ')
+								"
+								@onClickCountButton="
+									(id, quantity, type) => onClickCountButton(id, quantity, type)
+								"
+								@onClickRemove="id => removeCartItem(id)"
+							/>
+						</div>
+						<div class="space-y-5" v-else>
+							<SkeletonCheckoutItem
+								v-for="i in store.items.length ? store.items.length : 3"
+								:key="i"
+							/>
+						</div>
+					</template>
 				</WhiteBlock>
 
 				<WhiteBlock title="2. Персональные данные">
 					<template #lower>
 						<div class="grid grid-cols-2 gap-5">
-							<input
+							<Input
 								class="text-base"
 								name="firstName"
 								type="text"
 								placeholder="Имя"
 							/>
-							<input
+							<Input
 								class="text-base"
 								name="lastName"
 								type="text"
 								placeholder="Фамилия"
 							/>
-							<input
+							<Input
 								class="text-base"
 								name="email"
 								type="text"
 								placeholder="E-Mail"
 							/>
-							<input
+							<Input
 								class="text-base"
 								name="phone"
 								type="text"
@@ -48,19 +95,18 @@ definePageMeta({
 				<WhiteBlock title="3. Адрес доставки">
 					<template #lower>
 						<div class="flex flex-col gap-5">
-							<input
+							<Input
 								name="firstName"
 								class="text-base"
 								type="text"
 								placeholder="Имя"
 							/>
-							<textarea
+							<Textarea
 								class="text-base"
 								placeholder="Комментарий к заказу"
 								rows="5"
-								name=""
-								id=""
-							></textarea>
+								name="Comment to address"
+							></Textarea>
 						</div>
 					</template>
 				</WhiteBlock>
@@ -71,14 +117,16 @@ definePageMeta({
 					<template #upper>
 						<div class="flex flex-col gap-1">
 							<span class="text-xl">Итого:</span>
-							<span class="text-4xl font-extrabold">3506 &#8381;</span>
+							<span class="text-4xl font-extrabold"
+								>{{ store.totalAmount }} &#8381;</span
+							>
 						</div>
 					</template>
 
 					<template #lower>
 						<CheckoutItemDetails
 							title="Стоимость товаров:"
-							value="3000 &#8381;"
+							:value="`${store.totalAmount} &#8381;`"
 						>
 							<template #icon
 								><svg

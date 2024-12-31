@@ -54,8 +54,7 @@ const updatePrice = (prices: number[]): void => {
 		<div class="mt-5 border-y border-y-neutral-100 py-6 pb-7">
 			<p class="font-bold mb-3">Цена от и до:</p>
 			<div class="flex gap-3 mb-5">
-				<input
-					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+				<Input
 					type="number"
 					placeholder="0"
 					:min="0"
@@ -68,8 +67,7 @@ const updatePrice = (prices: number[]): void => {
 					"
 					:value="String(filter.price.value.priceFrom || 0)"
 				/>
-				<input
-					class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+				<Input
 					type="number"
 					placeholder="1000"
 					:min="100"

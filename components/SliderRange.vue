@@ -12,7 +12,7 @@ const value = ref<number>(max ?? 1000)
 </script>
 
 <template>
-	<input
+	<Input
 		type="range"
 		:min
 		:max
@@ -21,9 +21,3 @@ const value = ref<number>(max ?? 1000)
 		@change="onValueChange && onValueChange([9, 999])"
 	/>
 </template>
-
-<style scoped>
-input {
-	width: 100%;
-}
-</style>

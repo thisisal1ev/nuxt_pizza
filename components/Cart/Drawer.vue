@@ -9,7 +9,9 @@ defineProps<{
 }>()
 
 const store = useCartStore()
-onMounted(async () => await store.fetchCartItems())
+if (store.items.length === 0) {
+	onMounted(async () => await store.fetchCartItems())
+}
 
 const emit = defineEmits(['close'])
 
@@ -115,7 +117,7 @@ function removeCartItem(id: number, name: string) {
 					@onClickCountButton="
 						(id, quantity, type) => onClickCountButton(id, quantity, type)
 					"
-					@onClickRemove="() => removeCartItem(item.id, item.name)"
+					@onClickRemove="(id, name) => removeCartItem(id, name)"
 					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"
@@ -148,7 +150,7 @@ function removeCartItem(id: number, name: string) {
 						</b>
 					</div>
 
-					<NuxtLink to="/cart" class="inline-block w-full">
+					<NuxtLink to="/checkout" class="inline-block w-full">
 						<Button type="submit" class="w-full h-12 text-base">
 							Оформить заказ
 							<svg
