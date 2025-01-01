@@ -40,7 +40,7 @@ const onClickItem = (): void => {
 
 	<label
 		ref="elementRef"
-		:class="focused ? 'flex' : ''"
+		:class="focused ? '' : ''"
 		class="flex rounded-2xl flex-1 justify-between relative h-11 z-30"
 	>
 		<svg
@@ -59,7 +59,7 @@ const onClickItem = (): void => {
 			<path d="m21 21-4.3-4.3" />
 		</svg>
 
-		<Input
+		<input
 			class="outline-none w-full !rounded-2xl border-none bg-gray-100 pl-11"
 			type="search"
 			v-model.trim="searchQuery"

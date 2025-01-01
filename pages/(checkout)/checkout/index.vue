@@ -3,10 +3,7 @@ definePageMeta({
 	layout: 'checkout-layout',
 })
 
-const store = useCartStore()
-if (store.items.length === 0) {
-	onMounted(async () => await store.fetchCartItems())
-}
+const cartStore = useCart()
 
 const onClickCountButton = (
 	id: number,
@@ -14,12 +11,12 @@ const onClickCountButton = (
 	type: 'plus' | 'minus'
 ) => {
 	const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
-	store.updateItemQuantity(id, newQuantity)
+	cartStore.updateItemQuantity(id, newQuantity)
 }
 
 function removeCartItem(id: number) {
 	try {
-		store.removeCartItem(id)
+		cartStore.removeCartItem(id)
 	} catch (e: any) {
 		console.error(e.message)
 	}
@@ -34,9 +31,12 @@ function removeCartItem(id: number) {
 			<div class="flex flex-col gap-10 flex-1 mb-20">
 				<WhiteBlock title="1. Корзина">
 					<template #lower>
-						<div class="space-y-5" v-if="!store.loading && store.items.length">
+						<div
+							class="space-y-5"
+							v-if="!cartStore.loading && cartStore.items.length"
+						>
 							<CheckoutItem
-								v-for="item in store.items"
+								v-for="item in cartStore.items"
 								:key="item.id"
 								:id="item.id"
 								:imgURL="item.imgURL"
@@ -52,9 +52,9 @@ function removeCartItem(id: number) {
 								@onClickRemove="id => removeCartItem(id)"
 							/>
 						</div>
-						<div class="space-y-5" v-else-if="store.loading">
+						<div class="space-y-5" v-else-if="cartStore.loading">
 							<SkeletonCheckoutItem
-								v-for="i in store.items.length ? store.items.length : 3"
+								v-for="i in cartStore.items.length ? cartStore.items.length : 3"
 								:key="i"
 							/>
 						</div>
@@ -119,7 +119,7 @@ function removeCartItem(id: number) {
 						<div class="flex flex-col gap-1">
 							<span class="text-xl">Итого:</span>
 							<span class="text-4xl font-extrabold"
-								>{{ store.totalAmount }} &#8381;</span
+								>{{ cartStore.totalAmount }} &#8381;</span
 							>
 						</div>
 					</template>
@@ -127,7 +127,7 @@ function removeCartItem(id: number) {
 					<template #lower>
 						<CheckoutItemDetails
 							title="Стоимость товаров:"
-							:value="`${store.totalAmount} &#8381;`"
+							:value="`${cartStore.totalAmount} &#8381;`"
 						>
 							<template #icon
 								><svg

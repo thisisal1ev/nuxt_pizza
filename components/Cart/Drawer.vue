@@ -6,13 +6,8 @@ import { getCartItemDetails } from '~/lib/get-cart-item-details'
 defineProps<{
 	isVisible: boolean
 }>()
-
-const store = useCartStore()
-if (store.items.length === 0) {
-	onMounted(async () => await store.fetchCartItems())
-}
-
-const emit = defineEmits(['close'])
+defineEmits(['close'])
+const cartStore = useCart()
 
 const onClickCountButton = (
 	id: number,
@@ -20,12 +15,12 @@ const onClickCountButton = (
 	type: 'plus' | 'minus'
 ) => {
 	const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
-	store.updateItemQuantity(id, newQuantity)
+	cartStore.updateItemQuantity(id, newQuantity)
 }
 
 function removeCartItem(id: number, name: string) {
 	try {
-		store.removeCartItem(id)
+		cartStore.removeCartItem(id)
 
 		toast.success(`${name} удалена из корзины`, {
 			position: 'top-center',
@@ -77,7 +72,7 @@ function removeCartItem(id: number, name: string) {
 		class="fixed top-0 right-0 outline-none w-1/4 z-50 bg-[#f1f4ee] overscroll-none transform duration-500 h-screen"
 	>
 		<div
-			v-if="store.items.length > 0"
+			v-if="cartStore.items.length > 0"
 			class="flex flex-col h-full justify-between"
 		>
 			<div class="flex flex-col items-start p-10">
@@ -86,7 +81,10 @@ function removeCartItem(id: number, name: string) {
 						<span
 							>В корзине
 							<b
-								>{{ !store.loading ? store.items.length : '...' }} товара</b
+								>{{
+									!cartStore.loading ? cartStore.items.length : '...'
+								}}
+								товара</b
 							></span
 						>
 					</h4>
@@ -111,8 +109,8 @@ function removeCartItem(id: number, name: string) {
 
 			<div class="overflow-auto flex-1 grow space-y-5">
 				<CartDrawerItem
-					v-if="!store.loading"
-					v-for="item in store.items"
+					v-if="!cartStore.loading"
+					v-for="item in cartStore.items"
 					@onClickCountButton="
 						(id, quantity, type) => onClickCountButton(id, quantity, type)
 					"
@@ -144,7 +142,9 @@ function removeCartItem(id: number, name: string) {
 						</div>
 						<b class="text-lg"
 							>{{
-								!store.loading ? store.totalAmount + '&nbsp;&#8381;' : '...'
+								!cartStore.loading
+									? cartStore.totalAmount + '&nbsp;&#8381;'
+									: '...'
 							}}
 						</b>
 					</div>
