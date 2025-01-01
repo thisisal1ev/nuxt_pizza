@@ -3,6 +3,7 @@ interface Props {
 	title?: string
 	value?: string
 	class?: string
+	loading?: boolean
 }
 
 defineProps<Props>()
@@ -11,7 +12,7 @@ defineProps<Props>()
 <template>
 	<div :class class="flex my-4">
 		<span class="flex flex-1 text-lg text-neutral-500">
-			<div class='flex items-center'>
+			<div class="flex items-center">
 				<slot name="icon" />
 				{{ title }}
 			</div>
@@ -21,6 +22,7 @@ defineProps<Props>()
 			></div>
 		</span>
 
-		<span class="font-bold text-lg">{{ value }}</span>
+		<Skeleton v-if="loading" class="h-6 w-16 rounded-[6px]" />
+		<span v-else class="font-bold text-lg">{{ value }}</span>
 	</div>
 </template>

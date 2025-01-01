@@ -6,6 +6,7 @@ interface Props {
 	name: string
 	price: number
 	quantity: number
+	disabled?: boolean
 	class?: string
 }
 
@@ -14,7 +15,10 @@ defineEmits(['onClickCountButton', 'onClickRemove'])
 </script>
 
 <template>
-	<div class="flex items-center justify-between space-x-10" :class>
+	<div
+		class="flex items-center justify-between space-x-10"
+		:class="disabled ? 'opacity-50 pointer-events-none select-none' : ''"
+	>
 		<div class="flex items-center gap-3 flex-1">
 			<CartItemDetailsImage :src="imgURL" />
 

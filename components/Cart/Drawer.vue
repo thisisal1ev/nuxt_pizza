@@ -109,13 +109,11 @@ function removeCartItem(id: number, name: string) {
 
 			<div class="overflow-auto flex-1 grow space-y-5">
 				<CartDrawerItem
-					v-if="!cartStore.loading"
 					v-for="item in cartStore.items"
 					@onClickCountButton="
 						(id, quantity, type) => onClickCountButton(id, quantity, type)
 					"
 					@onClickRemove="(id, name) => removeCartItem(id, name)"
-					:class="'py-3 px-5'"
 					:key="item.id"
 					:id="item.id"
 					:imgURL="item.imgURL"
@@ -127,8 +125,8 @@ function removeCartItem(id: number, name: string) {
 					"
 					:quantity="item.quantity"
 					:price="item.price"
+					:disabled="cartStore.loading"
 				/>
-				<p class="px-10 font-medium text-base" v-else>Loading...</p>
 			</div>
 
 			<div class="py-8 px-10 bg-white">
