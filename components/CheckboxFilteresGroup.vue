@@ -49,7 +49,7 @@ watchEffect(() => {
 			"
 			class="mb-3"
 		>
-			<Input
+			<input
 				type="search"
 				v-model.trim="searchInput"
 				:placeholder="searchInputPlaceholder ?? 'Поиск...'"

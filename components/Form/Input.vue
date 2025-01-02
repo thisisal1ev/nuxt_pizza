@@ -7,13 +7,12 @@ interface Props {
 	placeholder?: string
 	required?: boolean
 }
-
 const props = defineProps<Props>()
 
 const { value, errorMessage, setValue, handleChange, handleBlur } =
-	useField<string>(props.name, {
-		validate: true,
-	})
+	useField<string>(props.name)
+
+const errorText = computed(() => errorMessage.value)
 
 const onClickClear = () => {
 	setValue('', true)
@@ -30,17 +29,16 @@ const onClickClear = () => {
 		<div class="relative">
 			<Input
 				:name
-				:value="value ?? ''"
+				:value
 				:placeholder
 				v-model="value"
 				@input="handleChange"
-				@blur="handleBlur"
 				class="text-base border-2 transition-colors duration-300 focus:border-primary h-12 text-md"
 			/>
 
 			<ClearButton v-if="value" @onClick="onClickClear" />
 		</div>
 
-		<ErrorText v-if="errorMessage" :text="errorMessage" class="mt-2" />
+		<ErrorText v-if="errorText" :text="errorText" class="mt-2" />
 	</div>
 </template>

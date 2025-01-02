@@ -18,7 +18,7 @@ defineProps<Props>()
 				<Input
 					:checked="checked ?? false"
 					@change="onCheckedChange?.(checked || Boolean(value))"
-					:value="value"
+					:value="String(value)"
 					:id="`checkbox-${String(name)}-${String(value)}`"
 					type="checkbox"
 					class="peer h-6 w-6 cursor-pointer transition-all appearance-none !rounded-lg border-none checked:bg-primary outline-none"

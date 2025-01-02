@@ -17,7 +17,7 @@ const value = ref<number>(max ?? 1000)
 		:min
 		:max
 		:step
-		:value
+		:value="String(value)"
 		@change="onValueChange && onValueChange([9, 999])"
 	/>
 </template>
