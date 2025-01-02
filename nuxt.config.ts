@@ -28,8 +28,19 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     "@prisma/nuxt",
     '@vueuse/nuxt',
-    '@vueuse/motion/nuxt'
+    '@vueuse/motion/nuxt',
+    '@vee-validate/nuxt'
   ],
+
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+      ErrorMessage: 'VeeErrorMessage',
+    },
+  },
 
   pinia: {
     storesDirs: ['./store/**'],

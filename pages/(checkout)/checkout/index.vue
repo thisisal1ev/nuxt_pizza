@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import type { PizzaSize, PizzaType } from '~/constants/pizza'
-import { getCartItemDetails } from '~/lib/get-cart-item-details'
+import {
+	checkoutFormSchema,
+	type CheckoutFormValues,
+} from '~/constants/checkout-form-schema'
 
 definePageMeta({
 	layout: 'checkout-layout',
@@ -24,109 +26,64 @@ function removeCartItem(id: number) {
 		console.error(e.message)
 	}
 }
+const form = useForm<CheckoutFormValues>({
+	validationSchema: checkoutFormSchema,
+	validateOnMount: true,
+	initialValues: {
+		email: '',
+		firstName: '',
+		lastName: '',
+		phone: '',
+		address: '',
+		comment: '',
+	},
+})
+
+const onSubmit = (values: CheckoutFormValues) => {
+	console.log('Form submitted with values:', values)
+}
 </script>
 
 <template>
 	<div class="mt-5">
 		<h1 class="font-extrabold mb-8 text-[36px] leading-9">Оформление заказа</h1>
 
-		<div class="flex gap-10">
-			<div class="flex flex-col gap-10 flex-1 mb-20">
-				<WhiteBlock title="1. Корзина">
-					<template #lower>
-						<div
-							class="space-y-5"
-							v-if="!cartStore.loading && cartStore.items.length"
-						>
-							<CheckoutItem
-								v-for="item in cartStore.items"
-								:key="item.id"
-								:id="item.id"
-								:imgURL="item.imgURL"
-								:name="item.name"
-								:quantity="item.quantity"
-								:price="item.price"
-								:details="
-									getCartItemDetails(
-										item.ingredients,
-										item.pizzaType as PizzaType,
-										item.pizzaSize as PizzaSize,
-									)
-								"
-								:disabled="cartStore.loading"
-								@onClickCountButton="
-									(id, quantity, type) => onClickCountButton(id, quantity, type)
-								"
-								@onClickRemove="id => removeCartItem(id)"
-							/>
-						</div>
-						<div class="space-y-5" v-else-if="cartStore.loading">
-							<SkeletonCheckoutItem
-								v-for="i in cartStore.items.length ? cartStore.items.length : 3"
-								:key="i"
-							/>
-						</div>
-						<p v-else class="text-lg font-semibold">Корзина пуста</p>
-					</template>
-				</WhiteBlock>
+		<VeeForm :form="form">
+			<form @submit="form.handleSubmit(onSubmit)">
+				<div class="flex gap-10">
+					<div class="flex flex-col gap-10 flex-1 mb-20">
+						<CheckoutCart
+							:items="cartStore.items"
+							:loading="cartStore.loading"
+							@onClickCountButton="onClickCountButton"
+							@removeCartItem="removeCartItem"
+						/>
 
-				<WhiteBlock title="2. Персональные данные">
-					<template #lower>
-						<div class="grid grid-cols-2 gap-5">
-							<Input
-								class="text-base border-2 transition-colors duration-300 focus:border-primary"
-								name="firstName"
-								type="text"
-								placeholder="Имя"
-							/>
-							<Input
-								class="text-base border-2 transition-colors duration-300 focus:border-primary"
-								name="lastName"
-								type="text"
-								placeholder="Фамилия"
-							/>
-							<Input
-								class="text-base border-2 transition-colors duration-300 focus:border-primary"
-								name="email"
-								type="email"
-								placeholder="E-Mail"
-							/>
-							<Input
-								class="text-base border-2 transition-colors duration-300 focus:border-primary"
-								name="phone"
-								type="tel"
-								placeholder="Телефон"
-							/>
-						</div>
-					</template>
-				</WhiteBlock>
+						<CheckoutPersonalForm
+							:class="
+								cartStore.loading
+									? 'opacity-40 pointer-events-none select-none'
+									: ''
+							"
+						/>
 
-				<WhiteBlock title="3. Адрес доставки">
-					<template #lower>
-						<div class="flex flex-col gap-5">
-							<Input
-								class="text-base border-2 transition-colors duration-300 focus:border-primary"
-								name="firstName"
-								type="text"
-								placeholder="Имя"
-							/>
-							<Textarea
-								class="text-base border-2 transition-colors duration-300 focus:border-primary"
-								placeholder="Комментарий к заказу"
-								rows="5"
-								name="Comment to address"
-							></Textarea>
-						</div>
-					</template>
-				</WhiteBlock>
-			</div>
+						<CheckoutAddressForm
+							:class="
+								cartStore.loading
+									? 'opacity-40 pointer-events-none select-none'
+									: ''
+							"
+						/>
+					</div>
 
-			<div class="w-[450px]">
-				<CheckoutSidebar
-					:loading="cartStore.loading"
-					:totalAmount="cartStore.totalAmount"
-				/>
-			</div>
-		</div>
+					<div class="w-[450px]">
+						<CheckoutSidebar
+							:loading="cartStore.loading"
+							:totalAmount="cartStore.totalAmount"
+						/>
+					</div>
+				</div>
+			</form>
+		</VeeForm>
 	</div>
 </template>
