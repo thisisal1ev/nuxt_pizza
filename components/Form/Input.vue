@@ -6,6 +6,7 @@ interface Props {
 	label?: string
 	placeholder?: string
 	required?: boolean
+	type?: string
 }
 const props = defineProps<Props>()
 
@@ -29,11 +30,16 @@ const onClickClear = () => {
 		<div class="relative">
 			<Input
 				:name
+				:type
 				:value
+				:required
 				:placeholder
 				v-model="value"
 				@input="handleChange"
-				class="text-base border-2 transition-colors duration-300 focus:border-primary h-12 text-md"
+				:class="
+					'text-base border-2 transition-colors duration-300 focus:border-primary h-12 text-md' +
+					(errorText ? ' border-red-500 focus:border-red-500' : '')
+				"
 			/>
 
 			<ClearButton v-if="value" @onClick="onClickClear" />

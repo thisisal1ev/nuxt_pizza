@@ -6,11 +6,16 @@ defineProps<{ class?: string }>()
 	<WhiteBlock title="3. Адрес доставки" :class>
 		<template #lower>
 			<div class="flex flex-col gap-5">
-				<FormInput name="address" type="text" placeholder="Введите адрес" />
+				<FormInput
+					name="address"
+					type="text"
+					placeholder="Введите адрес"
+					:required="true"
+				/>
 				<FormTextarea
-					placeholder="Комментарий к заказу"
 					:rows="5"
 					name="comment"
+					placeholder="Комментарий к заказу"
 				></FormTextarea>
 			</div>
 		</template>

@@ -8,24 +8,28 @@ defineProps<{ class?: string }>()
 			<div class="grid grid-cols-2 gap-5 pb-4">
 				<FormInput
 					name="firstName"
+					type="text"
 					:label="'Имя'"
 					:placeholder="'Имя'"
 					:required="true"
 				/>
 				<FormInput
 					name="lastName"
+					type="text"
 					:label="'Фамилия'"
 					:placeholder="'Фамилия'"
 					:required="true"
 				/>
 				<FormInput
 					name="email"
+					type="email"
 					:label="'E-Mail'"
 					:placeholder="'E-Mail'"
 					:required="true"
 				/>
 				<FormInput
 					name="phone"
+					type="tel"
 					:label="'Телефон'"
 					:placeholder="'Телефон'"
 					:required="true"

@@ -16,7 +16,19 @@ defineEmits(['onClickCountButton', 'removeCartItem'])
 	<WhiteBlock title="1. Корзина">
 		<template #lower>
 			<div class="space-y-5">
+				<div class="space-y-5" v-if="loading">
+					<SkeletonCheckoutItem
+						v-for="i in items.length ? items.length : 3"
+						:key="i"
+					/>
+				</div>
+
+				<p v-else-if="items.length === 0" class="text-lg font-semibold">
+					Корзина пуста
+				</p>
+
 				<CheckoutItem
+					v-else
 					v-for="item in items"
 					:key="item.id"
 					:id="item.id"
@@ -39,13 +51,6 @@ defineEmits(['onClickCountButton', 'removeCartItem'])
 					@onClickRemove="id => $emit('removeCartItem', id)"
 				/>
 			</div>
-			<!-- <div class="space-y-5" v-else-if="cartStore.loading">
-							<SkeletonCheckoutItem
-								v-for="i in cartStore.items.length ? cartStore.items.length : 3"
-								:key="i"
-							/>
-						</div>
-						<p v-else class="text-lg font-semibold">Корзина пуста</p> -->
 		</template>
 	</WhiteBlock>
 </template>

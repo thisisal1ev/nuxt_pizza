@@ -34,7 +34,7 @@ defineEmits(['onClickCountButton', 'onClickRemove'])
 				size="sm"
 			/>
 
-			<button class="group" @click="$emit('onClickRemove', id)">
+			<button type="button" class="group" @click="$emit('onClickRemove', id)">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"
