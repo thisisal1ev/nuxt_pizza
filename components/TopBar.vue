@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import type { Category } from '@prisma/client'
-
+import type { ProductWithRelations } from './Product/Form.vue'
 defineProps<{
-	categories: Category[]
+	categories: ProductWithRelations[]
 }>()
 </script>
 

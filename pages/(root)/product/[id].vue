@@ -1,10 +1,13 @@
 <script lang="ts" setup>
+import type { ProductWithRelations } from '~/components/Product/Form.vue'
+
 const {
 	params: { id },
 } = useRoute()
 
-const { data: product, error } = await useAsyncData(`product-${id}`, () =>
-	$fetch(`/api/product/${id}`)
+const { data: product, error } = await useAsyncData<ProductWithRelations>(
+	`product-${id}`,
+	() => $fetch<ProductWithRelations>(`/api/product/${id}`)
 )
 
 if (!product && !error) {
@@ -17,6 +20,6 @@ if (!product && !error) {
 
 <template>
 	<div class="container flex flex-col my-14">
-		<ProductForm :product />
+		<ProductForm v-if="product" :product />
 	</div>
 </template>

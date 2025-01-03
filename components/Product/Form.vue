@@ -11,7 +11,6 @@ export type ProductWithRelations = Product & {
 interface Props {
 	product: ProductWithRelations
 }
-
 const { product } = defineProps<Props>()
 
 const cartStore = useCartStore()

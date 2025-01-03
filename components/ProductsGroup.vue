@@ -7,7 +7,7 @@ interface Props {
 	products: ProductWithRelations[]
 }
 
-const { products, categoryId } = defineProps<Props>()
+const { categoryId } = defineProps<Props>()
 
 const target = ref<HTMLElement | null>(null)
 const store = useCategoryStore()
