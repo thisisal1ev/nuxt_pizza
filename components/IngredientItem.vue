@@ -4,7 +4,6 @@ interface Props {
 	name: string
 	price: number
 	active?: boolean
-	onClick?: () => void
 }
 
 defineProps<Props>()
@@ -12,7 +11,6 @@ defineProps<Props>()
 
 <template>
 	<div
-		@click="onClick?.()"
 		:class="[
 			'flex items-center flex-col p-1 rounded-xl w-32 text-center relative cursor-pointer shadow-md bg-white',
 			{ 'border border-primary': active },

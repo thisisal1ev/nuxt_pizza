@@ -16,14 +16,17 @@ defineEmits(['onClickCountButton', 'removeCartItem'])
 	<WhiteBlock title="1. Корзина">
 		<template #lower>
 			<div class="space-y-5">
-				<div class="space-y-5" v-if="loading">
+				<div class="space-y-5" v-if="loading && items.length === 0">
 					<SkeletonCheckoutItem
 						v-for="i in items.length ? items.length : 3"
 						:key="i"
 					/>
 				</div>
 
-				<p v-else-if="items.length === 0" class="text-lg font-semibold">
+				<p
+					v-else-if="items.length === 0 && !loading"
+					class="text-lg font-semibold"
+				>
 					Корзина пуста
 				</p>
 

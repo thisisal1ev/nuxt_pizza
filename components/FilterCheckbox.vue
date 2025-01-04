@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 interface Props {
 	value: number
-	onCheckedChange?: (checked: boolean) => void
 	checked?: boolean
 	name?: string
 }
 
 defineProps<Props>()
+defineEmits(['onCheckedChange'])
 </script>
 
 <template>
@@ -17,7 +17,7 @@ defineProps<Props>()
 			><div class="inline-flex items-center relative rounded-lg bg-slate-200">
 				<Input
 					:checked="checked ?? false"
-					@change="onCheckedChange?.(checked || Boolean(value))"
+					@change="() => $emit('onCheckedChange', checked || Boolean(value))"
 					:value="String(value)"
 					:id="`checkbox-${String(name)}-${String(value)}`"
 					type="checkbox"

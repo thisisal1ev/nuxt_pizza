@@ -11,10 +11,10 @@ interface Props {
 	defaultValue?: IRecept[]
 	loading?: boolean
 	searchInputPlaceholder?: string
-	onClickCheckbox?: (id: string) => void
 	selected?: Set<string>
 	name?: string
 }
+defineEmits(['onClickCheckbox'])
 
 const { items, defaultValue, limit } = defineProps<Props>()
 
@@ -64,7 +64,7 @@ watchEffect(() => {
 				:key="item.text"
 				:value="Number(item.value)"
 				:checked="selected?.has(String(item?.value))"
-				:onCheckedChange="() => onClickCheckbox?.(String(item?.value))"
+				@onCheckedChange="() => $emit('onClickCheckbox', String(item?.value))"
 				:name
 			>
 				{{ item.text }}

@@ -7,6 +7,7 @@ defineProps<{
 	isVisible: boolean
 }>()
 defineEmits(['close'])
+
 const cartStore = useCart()
 
 const onClickCountButton = (

@@ -1,8 +1,14 @@
 <script lang="ts" setup>
+import type { Category } from '@prisma/client'
 import type { ProductWithRelations } from '~/components/Product/Form.vue'
 
-const { data: categories } = await useAsyncData('categories', () =>
-	$fetch('/api/categories')
+export interface CategoryProps extends Category {
+	products: ProductWithRelations[]
+}
+
+const { data: categories } = await useAsyncData<CategoryProps[]>(
+	'categories',
+	() => $fetch<CategoryProps[]>('/api/categories')
 )
 </script>
 
@@ -14,7 +20,7 @@ const { data: categories } = await useAsyncData('categories', () =>
 
 		<TopBar
 			v-if="categories"
-			:categories="categories.filter(category => category.products.length > 0) as unknown as ProductWithRelations[]"
+			:categories="categories.filter(category => category.products.length > 0)"
 		/>
 
 		<div class="container mt-10 pb-14">
@@ -31,7 +37,7 @@ const { data: categories } = await useAsyncData('categories', () =>
 							:categoryId="category.id"
 							:title="category.name"
 							:key="category.id"
-							:products="category.products as unknown as ProductWithRelations[]"
+							:products="category.products"
 						/>
 					</div>
 				</div>

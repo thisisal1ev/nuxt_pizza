@@ -30,7 +30,7 @@ const updatePrice = (prices: number[]): void => {
 		<CheckboxFilteresGroup
 			name="pizzaTypes"
 			title="Тип теста:"
-			:onClickCheckbox="filter.setPizzaTypes"
+			@onClickCheckbox="filter.setPizzaTypes"
 			:selected="filter.pizzaTypes"
 			:items="[
 				{ text: 'Тонкое', value: 1 },
@@ -42,7 +42,7 @@ const updatePrice = (prices: number[]): void => {
 			title="Размеры:"
 			name="sizes"
 			:class="'mb-5'"
-			:onClickCheckbox="filter.setSizes"
+			@onClickCheckbox="filter.setSizes"
 			:selected="filter.sizes"
 			:items="[
 				{ text: '20 см', value: 20 },
@@ -99,7 +99,7 @@ const updatePrice = (prices: number[]): void => {
 			:name="'ingredients'"
 			:limit="6"
 			:defaultValue="items.slice(0, 6)"
-			:onClickCheckbox="filter.setSelectedIngredients"
+			@onClickCheckbox="filter.setSelectedIngredients"
 			:items
 			:loading
 			:selected="filter.ingredients"

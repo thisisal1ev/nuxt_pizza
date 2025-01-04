@@ -5,7 +5,7 @@ defineProps<{ class?: string }>()
 <template>
 	<WhiteBlock title="3. Адрес доставки" :class>
 		<template #lower>
-			<div class="flex flex-col gap-5">
+			<div class="flex flex-col gap-5 py-4">
 				<FormInput
 					name="address"
 					type="text"

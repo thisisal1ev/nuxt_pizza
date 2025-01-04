@@ -18,6 +18,6 @@ const value = ref<number>(max ?? 1000)
 		:max
 		:step
 		:value="String(value)"
-		@change="onValueChange && onValueChange([9, 999])"
+		@change="onValueChange?.([9, 999])"
 	/>
 </template>

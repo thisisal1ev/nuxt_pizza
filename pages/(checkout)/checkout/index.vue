@@ -26,6 +26,7 @@ function removeCartItem(id: number) {
 		console.error(e.message)
 	}
 }
+
 const { handleSubmit } = useForm<CheckoutFormValues>({
 	validationSchema: checkoutFormSchema,
 	initialValues: {

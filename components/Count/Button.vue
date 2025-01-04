@@ -12,7 +12,7 @@ defineEmits(['onClick'])
 <template>
 	<div :class class="inline-flex items-center justify-between gap-3">
 		<CountIconButton
-			@click="$emit('onClick', 'minus')"
+			@onClick="(type:string)=> $emit('onClick', type)"
 			type="minus"
 			:disabled="quantity === 1"
 			:size

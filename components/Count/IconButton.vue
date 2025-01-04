@@ -5,10 +5,10 @@ interface IconButtonProps {
 	size?: CountButtonProps['size']
 	disabled?: boolean
 	type?: 'plus' | 'minus'
-	onClick?: (type: 'plus' | 'minus') => void
 }
 
 defineProps<IconButtonProps>()
+defineEmits(['onClick'])
 </script>
 
 <template>
@@ -16,7 +16,7 @@ defineProps<IconButtonProps>()
 		variant="outline"
 		type="button"
 		size="icon"
-		@click="onClick?.(type === 'minus' ? 'minus' : 'plus')"
+		@click="$emit('onClick', type === 'minus' ? 'minus' : 'plus')"
 		:disabled
 		:isIcon="true"
 		:class="[
