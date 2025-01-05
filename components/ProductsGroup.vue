@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { toast } from 'vue3-toastify'
 import type { ProductWithRelations } from './Product/Form.vue'
 
 interface Props {
@@ -11,6 +12,7 @@ const { categoryId } = defineProps<Props>()
 
 const target = ref<HTMLElement | null>(null)
 const store = useCategoryStore()
+const cartStore = useCartStore()
 
 const intersection = useIntersectionObserver(
 	target,
@@ -31,6 +33,36 @@ const intersection = useIntersectionObserver(
 		threshold: 0.4,
 	}
 )
+
+const onSubmit = async (
+	product: ProductWithRelations,
+	productItemId?: number,
+	ingredients?: number[]
+) => {
+	const firstItem = product.items[0]
+
+	try {
+		const itemId = productItemId ?? firstItem.id
+
+		await cartStore.addCartItem({
+			productItemId: itemId,
+			ingredients,
+		})
+
+		toast.success(`${product.name} добавлена в корзину`, {
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	} catch (e: any) {
+		toast.error('Не удалось добавить товар в корзину', {
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+		console.error(e.message)
+	}
+}
 </script>
 
 <template>
@@ -45,7 +77,9 @@ const intersection = useIntersectionObserver(
 				:name="product.name"
 				:imgURL="product.imgURL"
 				:price="product.items[0].price"
+				:loading="cartStore.loading"
 				:ingredients="product.ingredients"
+				@addOnCart="onSubmit(product)"
 			/>
 		</div>
 	</section>
