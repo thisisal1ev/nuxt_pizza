@@ -80,13 +80,7 @@ function removeCartItem(id: number, name: string) {
 				<div class="flex items-center justify-between w-full">
 					<h4>
 						<span
-							>В корзине
-							<b
-								>{{
-									!cartStore.loading ? cartStore.items.length : '...'
-								}}
-								товара</b
-							></span
+							>В корзине <b>{{ cartStore.items.length }} товара</b></span
 						>
 					</h4>
 					<button type="button" @click="$emit('close')">

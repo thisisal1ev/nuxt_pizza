@@ -48,7 +48,7 @@ defineEmits(['onClickCountButton', 'removeCartItem'])
 								"
 					:disabled="loading"
 					@onClickCountButton="
-						(id, quantity, type) =>
+						(id:number, quantity:number, type:string) =>
 							$emit('onClickCountButton', id, quantity, type)
 					"
 					@onClickRemove="id => $emit('removeCartItem', id)"

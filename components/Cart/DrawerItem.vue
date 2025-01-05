@@ -28,7 +28,7 @@ defineEmits(['onClickCountButton', 'onClickRemove'])
 
 			<div class="flex items-center justify-between">
 				<CountButton
-					@onClick="type => $emit('onClickCountButton', id, quantity, type)"
+					@onClick="(type:string) => $emit('onClickCountButton', id, quantity, type)"
 					:quantity
 					size="sm"
 				/>
