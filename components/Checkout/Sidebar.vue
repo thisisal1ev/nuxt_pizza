@@ -114,6 +114,7 @@ watchEffect(() => {
 			</CheckoutItemDetails>
 
 			<Button
+				:disabled="loading"
 				type="submit"
 				class="w-full h-14 rounded-2xl mt-6 text-base font-bold"
 			>

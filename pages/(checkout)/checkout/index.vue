@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 import {
 	checkoutFormSchema,
 	type CheckoutFormValues,
@@ -9,6 +11,7 @@ definePageMeta({
 })
 
 const cartStore = useCart()
+const submitting = ref<boolean>(false)
 
 const onClickCountButton = (
 	id: number,
@@ -27,7 +30,7 @@ function removeCartItem(id: number) {
 	}
 }
 
-const { handleSubmit } = useForm<CheckoutFormValues>({
+const { handleSubmit, values } = useForm<CheckoutFormValues>({
 	validationSchema: checkoutFormSchema,
 	initialValues: {
 		email: '',
@@ -39,8 +42,38 @@ const { handleSubmit } = useForm<CheckoutFormValues>({
 	},
 })
 
-const onSubmit = handleSubmit((values: CheckoutFormValues) => {
+const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 	console.log('Form submitted with values:', values)
+	submitting.value = true
+
+	try {
+		const url = await $fetch('/api/order', {
+			method: 'POST',
+			body: values,
+		})
+
+		toast.success('Заказ успешно оформлен! 📝 Переход на оплату...', {
+			icon: '✅',
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+
+		if (url) {
+			location.href = url
+		}
+	} catch (e: any) {
+		console.error('Order submission failed:', e)
+
+		toast.error('Не удалось оформить заказ', {
+			icon: '❌',
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	} finally {
+		submitting.value = false
+	}
 })
 </script>
 
@@ -77,7 +110,7 @@ const onSubmit = handleSubmit((values: CheckoutFormValues) => {
 
 				<div class="w-[450px]">
 					<CheckoutSidebar
-						:loading="cartStore.loading"
+						:loading="cartStore.loading || submitting"
 						:totalAmount="cartStore.totalAmount"
 					/>
 				</div>

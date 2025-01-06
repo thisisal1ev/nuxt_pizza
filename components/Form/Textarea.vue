@@ -33,7 +33,8 @@ const onClickClear = () => {
 				:value
 				:placeholder
 				v-model="value"
-				@input="handleChange"
+				@onInput="handleChange"
+				@blur="handleBlur"
 				class="h-12 text-base border-2 transition-colors duration-300 focus:border-primary"
 			/>
 
