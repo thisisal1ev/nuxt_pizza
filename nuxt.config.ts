@@ -26,7 +26,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/fonts',
     '@pinia/nuxt',
-    "@prisma/nuxt",
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt',
     '@vee-validate/nuxt'
@@ -44,10 +43,6 @@ export default defineNuxtConfig({
 
   pinia: {
     storesDirs: ['./store/**'],
-  },
-
-  prisma: {
-    autoSetupPrisma: true,
   },
 
   css: ['./assets/main.css'],

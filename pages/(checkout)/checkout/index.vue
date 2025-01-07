@@ -51,6 +51,7 @@ const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 			method: 'POST',
 			body: values,
 		})
+		console.log('Order submitted successfully:', url)
 
 		toast.success('Заказ успешно оформлен! 📝 Переход на оплату...', {
 			icon: '✅',

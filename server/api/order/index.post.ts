@@ -2,7 +2,6 @@ import { OrderStatus } from '@prisma/client'
 import { CheckoutFormValues } from '~/constants/checkout-form-schema'
 import prisma from '~/lib/prisma'
 import { sendEmail } from '~/lib/send-email'
-import PayOrderTemplate from '~/components/EmailTemplates/PayOrder'
 
 export default defineEventHandler(async (event) => {
 	try {
@@ -12,7 +11,7 @@ export default defineEventHandler(async (event) => {
 		if (!token) {
 			throw createError({
 				statusMessage: 'Cart token not found',
-				statusCode: 400
+				statusCode: 400,
 			})
 		}
 
@@ -24,28 +23,28 @@ export default defineEventHandler(async (event) => {
 						ingredients: true,
 						productItem: {
 							include: {
-								product: true
-							}
-						}
-					}
-				}
+								product: true,
+							},
+						},
+					},
+				},
 			},
 			where: {
 				token,
-			}
+			},
 		})
 
 		if (!userCart) {
 			throw createError({
 				statusMessage: 'Cart not found',
-				statusCode: 400
+				statusCode: 400,
 			})
 		}
 
 		if (userCart?.totalAmount === 0) {
 			throw createError({
 				statusMessage: 'Cart is empty',
-				statusCode: 400
+				statusCode: 400,
 			})
 		}
 
@@ -60,29 +59,37 @@ export default defineEventHandler(async (event) => {
 				totalAmount: userCart.totalAmount,
 				status: OrderStatus.PENDING,
 				items: JSON.stringify(userCart.items),
-			}
+			},
 		})
 
 		await prisma.cart.update({
 			where: {
-				id: userCart.id
+				id: userCart.id,
 			},
 			data: {
 				totalAmount: 0,
-			}
+			},
 		})
 
 		await prisma.cartItem.deleteMany({
 			where: {
-				cartId: userCart.id
-			}
+				cartId: userCart.id,
+			},
 		})
 
-		sendEmail(data.email, `Nuxt Pizza / Оплатите заказ #${order.id}`, PayOrderTemplate.setup({
-			orderId: order.id,
-			totalAmount: order.totalAmount,
-			paymentURL: 'https://github.com/thisisal1ev'
-		}))
+		const paymentURL = 'https://github.com/thisisal1ev'
+
+		await sendEmail(
+			data.email,
+			`Nuxt Pizza / Оплатите заказ #${order.id}`,
+			{
+				orderId: order.id,
+				totalAmount: order.totalAmount,
+				paymentURL,
+			}
+		)
+
+		return paymentURL
 	} catch (e) {
 		console.log('[CreateOrder] Server error', e)
 	}

@@ -12,7 +12,6 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
-		"@prisma/nuxt": "^0.0.35",
 		"@vee-validate/nuxt": "^4.15.0",
 		"@vee-validate/zod": "^4.15.0",
 		"@vueuse/motion": "^2.2.6",
