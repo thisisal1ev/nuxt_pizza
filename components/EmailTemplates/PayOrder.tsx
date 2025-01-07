@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
 	props: {
@@ -21,7 +21,7 @@ export default defineComponent({
 				<h1>Заказ #{props.orderId}</h1>
 				<p>
 					Оплатите заказ на сумму {props.totalAmount} &#8381;. Перейдите
-					<a href={props.paymentURL}>по этой ссылке</a> для оплаты заказа.
+					<a href={props.paymentURL}> по этой ссылке</a> для оплаты заказа.
 				</p>
 			</div>
 		)
