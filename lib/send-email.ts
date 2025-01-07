@@ -1,12 +1,13 @@
-import { Resend } from 'resend'
 import { renderToString } from '@vue/server-renderer'
+import { Resend } from 'resend'
 import { createSSRApp, h } from 'vue'
+import PayOrderTemplate from '~/components/EmailTemplates/PayOrder'
 
-export const sendEmail = async (to: string, subject: string, template: any) => {
+export const sendEmail = async (to: string, subject: string, props: any) => {
 	const resend = new Resend(process.env.RESEND_API_KEY)
 
 	const app = createSSRApp({
-		render: () => h(template),
+		render: () => h(PayOrderTemplate, props),
 	})
 
 	const html = await renderToString(app)
