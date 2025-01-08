@@ -6,7 +6,7 @@ export interface CategoryProps extends Category {
 	products: ProductWithRelations[]
 }
 
-const { data: categories } = await useAsyncData<CategoryProps[]>(
+const { data: categories, status } = await useAsyncData<CategoryProps[]>(
 	'categories',
 	() => $fetch<CategoryProps[]>('/api/categories')
 )
@@ -31,6 +31,11 @@ const { data: categories } = await useAsyncData<CategoryProps[]>(
 
 				<div class="flex-1">
 					<div class="flex flex-col gap-16">
+						<SkeletonProductGroup
+							v-if="status !== 'success'"
+							v-for="i in 3"
+							:key="i"
+						/>
 						<ProductsGroup
 							v-if="categories"
 							v-for="category in categories"

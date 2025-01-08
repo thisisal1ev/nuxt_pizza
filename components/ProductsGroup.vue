@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { categoryId } = defineProps<Props>()
-const toast = (await import('vue3-toastify')).toast
 const target = ref<HTMLElement | null>(null)
 const store = useCategoryStore()
 const cartStore = useCartStore()
@@ -42,6 +41,7 @@ const onSubmit = async (
 
 	try {
 		const itemId = productItemId ?? firstItem.id
+		const toast = (await import('vue3-toastify')).toast
 
 		await cartStore.addCartItem({
 			productItemId: itemId,
@@ -54,6 +54,9 @@ const onSubmit = async (
 			bodyClassName: 'font-nunito',
 		})
 	} catch (e: any) {
+		console.error(e)
+		const toast = (await import('vue3-toastify')).toast
+
 		toast.error('Не удалось добавить товар в корзину', {
 			position: 'top-center',
 			pauseOnHover: false,

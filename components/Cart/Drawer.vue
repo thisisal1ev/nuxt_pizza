@@ -8,7 +8,6 @@ defineProps<{
 defineEmits(['close'])
 
 const cartStore = useCart()
-const toast = (await import('vue3-toastify')).toast
 
 const onClickCountButton = (
 	id: number,
@@ -19,8 +18,9 @@ const onClickCountButton = (
 	cartStore.updateItemQuantity(id, newQuantity)
 }
 
-function removeCartItem(id: number, name: string) {
+async function removeCartItem(id: number, name: string) {
 	try {
+		const toast = (await import('vue3-toastify')).toast
 		cartStore.removeCartItem(id)
 
 		toast.success(`${name} удалена из корзины`, {
@@ -30,6 +30,7 @@ function removeCartItem(id: number, name: string) {
 		})
 	} catch (e: any) {
 		console.error(e.message)
+		const toast = (await import('vue3-toastify')).toast
 
 		toast.error('Не удалось удалить товар из корзины', {
 			position: 'top-center',

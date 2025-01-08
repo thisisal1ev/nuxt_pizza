@@ -11,7 +11,6 @@ definePageMeta({
 
 const cartStore = useCart()
 const submitting = ref<boolean>(false)
-const toast = (await import('vue3-toastify')).toast
 
 const onClickCountButton = (
 	id: number,
@@ -45,13 +44,12 @@ const { handleSubmit } = useForm<CheckoutFormValues>({
 const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 	console.log('Form submitted with values:', values)
 	submitting.value = true
-
 	try {
+		const toast = (await import('vue3-toastify')).toast
 		const url = await $fetch('/api/order', {
 			method: 'POST',
 			body: values,
 		})
-		console.log('Order submitted successfully:', url)
 
 		toast.success('Заказ успешно оформлен! 📝 Переход на оплату...', {
 			icon: '✅',
@@ -65,6 +63,7 @@ const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 		}
 	} catch (e: any) {
 		console.error('Order submission failed:', e)
+		const toast = (await import('vue3-toastify')).toast
 
 		toast.error('Не удалось оформить заказ', {
 			icon: '❌',

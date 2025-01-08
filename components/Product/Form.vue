@@ -11,7 +11,6 @@ interface Props {
 	product: ProductWithRelations
 }
 const { product } = defineProps<Props>()
-const toast = (await import('vue3-toastify')).toast
 
 const cartStore = useCartStore()
 const firstItem = product.items[0]
@@ -20,6 +19,7 @@ const isPizza = Boolean(firstItem.pizzaType)
 const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 	try {
 		const itemId = productItemId ?? firstItem.id
+		const toast = (await import('vue3-toastify')).toast
 
 		await cartStore.addCartItem({
 			productItemId: itemId,
@@ -32,6 +32,9 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 			bodyClassName: 'font-nunito',
 		})
 	} catch (e: any) {
+		console.error(e)
+		const toast = (await import('vue3-toastify')).toast
+
 		toast.error('Не удалось добавить товар в корзину', {
 			position: 'top-center',
 			pauseOnHover: false,
