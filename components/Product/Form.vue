@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { Ingredient, Product, ProductItem } from '@prisma/client'
-import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
 export type ProductWithRelations = Product & {
@@ -12,6 +11,7 @@ interface Props {
 	product: ProductWithRelations
 }
 const { product } = defineProps<Props>()
+const toast = (await import('vue3-toastify')).toast
 
 const cartStore = useCartStore()
 const firstItem = product.items[0]

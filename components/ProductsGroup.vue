@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { toast } from 'vue3-toastify'
 import type { ProductWithRelations } from './Product/Form.vue'
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 }
 
 const { categoryId } = defineProps<Props>()
-
+const toast = (await import('vue3-toastify')).toast
 const target = ref<HTMLElement | null>(null)
 const store = useCategoryStore()
 const cartStore = useCartStore()

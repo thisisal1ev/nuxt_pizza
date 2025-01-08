@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import {
 	checkoutFormSchema,
@@ -12,6 +11,7 @@ definePageMeta({
 
 const cartStore = useCart()
 const submitting = ref<boolean>(false)
+const toast = (await import('vue3-toastify')).toast
 
 const onClickCountButton = (
 	id: number,
@@ -30,7 +30,7 @@ function removeCartItem(id: number) {
 	}
 }
 
-const { handleSubmit, values } = useForm<CheckoutFormValues>({
+const { handleSubmit } = useForm<CheckoutFormValues>({
 	validationSchema: checkoutFormSchema,
 	initialValues: {
 		email: '',

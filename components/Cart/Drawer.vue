@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { toast } from 'vue3-toastify'
 import type { PizzaSize, PizzaType } from '~/constants/pizza'
 import { getCartItemDetails } from '~/lib/get-cart-item-details'
 
@@ -9,6 +8,7 @@ defineProps<{
 defineEmits(['close'])
 
 const cartStore = useCart()
+const toast = (await import('vue3-toastify')).toast
 
 const onClickCountButton = (
 	id: number,
