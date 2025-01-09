@@ -7,17 +7,26 @@ interface Props {
 	onValueChange?: (value: number[]) => void
 }
 
-const { max } = defineProps<Props>()
-const value = ref<number>(max ?? 1000)
+defineProps<Props>()
+defineEmits(['onValueChange'])
+
+const InputRef = ref<HTMLInputElement | null>(null)
 </script>
 
 <template>
-	<Input
+	<input
+		ref="InputRef"
 		type="range"
 		:min
 		:max
 		:step
 		:value="String(value)"
-		@change="onValueChange?.([9, 999])"
+		@input="$emit('onValueChange', [0, InputRef?.valueAsNumber])"
 	/>
 </template>
+
+<style scoped>
+input {
+	width: 100%;
+}
+</style>

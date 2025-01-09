@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-defineProps<{ value?: string; type?: string }>()
+defineProps<{
+	value?: string
+	type?: string
+}>()
 defineEmits(['input'])
 </script>
 

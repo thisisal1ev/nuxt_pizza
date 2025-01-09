@@ -7,6 +7,8 @@ interface IRecept {
 const items = ref<IRecept[]>([])
 const filter = useFilter()
 const { ingredients, loading } = useIngredients()
+const minValue = ref<number>(0)
+const maxValue = ref<number>(1000)
 
 useQueryFilters(filter)
 
@@ -56,10 +58,10 @@ const updatePrice = (prices: number[]): void => {
 			<div class="flex gap-3 mb-5">
 				<Input
 					type="number"
-					placeholder="0"
-					:min="0"
-					:max="1000"
-					@input="
+					:placeholder="minValue"
+					:min="minValue"
+					:max="maxValue"
+					@change="
 						filter.setPrice(
 							'priceFrom',
 							Number(($event.target as HTMLInputElement)?.value)
@@ -67,12 +69,13 @@ const updatePrice = (prices: number[]): void => {
 					"
 					:value="String(filter.price.value.priceFrom || 0)"
 				/>
+
 				<Input
 					type="number"
-					placeholder="1000"
-					:min="100"
-					:max="1000"
-					@input="
+					:placeholder="maxValue"
+					:min="minValue"
+					:max="maxValue"
+					@change="
 						filter.setPrice(
 							'priceTo',
 							Number(($event.target as HTMLInputElement)?.value)
@@ -83,14 +86,14 @@ const updatePrice = (prices: number[]): void => {
 			</div>
 
 			<SliderRange
-				:min="0"
-				:max="5000"
+				:min="minValue"
+				:max="maxValue"
 				:step="10"
 				:value="[
-					filter.price.value.priceFrom || 0,
-					filter.price.value.priceTo || 1000,
+					filter.price.value.priceFrom || minValue,
+					filter.price.value.priceTo || maxValue,
 				]"
-				:onValueChange="updatePrice"
+				@onValueChange="(prices:number[]) => updatePrice(prices)"
 			/>
 		</div>
 
