@@ -15,8 +15,8 @@ export const useIngredients = (): ReturnProps => {
 			const fetchedIngredients = await getAll()
 			ingredients.value = fetchedIngredients
 			loading.value = false
-		} catch (e: any) {
-			console.error('Error fetching ingredients:', e.message)
+		} catch (e) {
+			console.error('Error fetching ingredients:', e)
 		}
 	}
 

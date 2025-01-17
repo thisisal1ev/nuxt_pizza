@@ -36,8 +36,8 @@ export default defineEventHandler(async (event) => {
 			items: updatedUserCart?.items,
 			totalAmount: updatedUserCart?.totalAmount,
 		}
-	} catch (error) {
-		console.error('[CART_PATCH] Server error', error)
+	} catch (e) {
+		console.error('[CART_PATCH] Server error', e)
 		return {
 			message: 'Не удалось обновить корзину',
 			status: 500,

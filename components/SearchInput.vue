@@ -16,8 +16,8 @@ const debouncedSearch = useDebounceFn(async (query: string): Promise<void> => {
 	try {
 		const response = await Api.products.search(query)
 		products.value = response
-	} catch (error: any) {
-		console.error('Error:', error?.message)
+	} catch (e) {
+		console.error('Error:', e)
 	}
 }, 100)
 

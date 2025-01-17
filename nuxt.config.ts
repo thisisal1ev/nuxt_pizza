@@ -33,19 +33,13 @@ export default defineNuxtConfig({
 
   veeValidate: {
     autoImports: true,
-    componentNames: {
-      Form: 'VeeForm',
-      Field: 'VeeField',
-      FieldArray: 'VeeFieldArray',
-      ErrorMessage: 'VeeErrorMessage',
-    },
   },
 
   pinia: {
     storesDirs: ['./store/**'],
   },
 
-  css: ['./assets/main.css'],
+  css: ['./assets/main.css', 'vue3-toastify/dist/index.css'],
 
   fonts: {
     families: [

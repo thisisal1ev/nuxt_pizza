@@ -55,8 +55,8 @@ export default defineEventHandler(async (event) => {
 		})
 
 		return updatedUserCart
-	} catch (error) {
-		console.error('[CART_POST] Server error', error)
+	} catch (e) {
+		console.error('[CART_POST] Server error', e)
 		return {
 			statusCode: 500,
 			body: { message: 'Не удалось создать корзину' },

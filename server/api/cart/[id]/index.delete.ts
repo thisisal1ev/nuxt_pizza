@@ -38,8 +38,8 @@ export default defineEventHandler(async (event) => {
 			items: updatedUserCart?.items,
 			totalAmount: updatedUserCart?.totalAmount,
 		}
-	} catch (error) {
-		console.error('[CART_DELETE] Server error', error)
+	} catch (e) {
+		console.error('[CART_DELETE] Server error', e)
 		return {
 			statusCode: 500,
 			body: { message: 'Не удалось удалить корзину' },

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { Ingredient, Product, ProductItem } from '@prisma/client'
-import 'vue3-toastify/dist/index.css'
 
 export type ProductWithRelations = Product & {
 	items: ProductItem[]
@@ -31,7 +30,7 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
-	} catch (e: any) {
+	} catch (e) {
 		console.error(e)
 		const toast = (await import('vue3-toastify')).toast
 
@@ -40,7 +39,6 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
-		console.error(e.message)
 	}
 }
 </script>

@@ -53,7 +53,7 @@ const onSubmit = async (
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
-	} catch (e: any) {
+	} catch (e) {
 		console.error(e)
 		const toast = (await import('vue3-toastify')).toast
 
@@ -62,7 +62,6 @@ const onSubmit = async (
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
-		console.error(e.message)
 	}
 }
 </script>

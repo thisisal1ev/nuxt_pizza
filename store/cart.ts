@@ -28,9 +28,9 @@ export const useCartStore = defineStore('cartStore', {
 				const details = getCartDetails(data)
 				this.items = details.items
 				this.totalAmount = details.totalAmount
-			} catch (error: any) {
+			} catch (e) {
 				this.error = true
-				console.error(error.message)
+				console.error(e)
 			} finally {
 				this.loading = false
 			}
@@ -45,9 +45,9 @@ export const useCartStore = defineStore('cartStore', {
 				const details = getCartDetails(data)
 				this.items = details.items
 				this.totalAmount = details.totalAmount
-			} catch (error: any) {
+			} catch (e) {
 				this.error = true
-				console.error(error.message)
+				console.error(e)
 			} finally {
 				this.loading = false
 			}
@@ -62,9 +62,9 @@ export const useCartStore = defineStore('cartStore', {
 				const details = getCartDetails(data)
 				this.items = details.items
 				this.totalAmount = details.totalAmount
-			} catch (error: any) {
+			} catch (e) {
 				this.error = true
-				console.error(error.message)
+				console.error(e)
 			} finally {
 				this.loading = false
 			}
@@ -79,9 +79,9 @@ export const useCartStore = defineStore('cartStore', {
 				const details = getCartDetails(data)
 				this.items = details.items
 				this.totalAmount = details.totalAmount
-			} catch (error: any) {
+			} catch (e) {
 				this.error = true
-				console.error(error.message)
+				console.error(e)
 			} finally {
 				this.loading = false
 			}

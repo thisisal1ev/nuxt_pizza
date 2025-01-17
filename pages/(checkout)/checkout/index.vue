@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import 'vue3-toastify/dist/index.css'
 import {
 	checkoutFormSchema,
 	type CheckoutFormValues,
@@ -24,8 +23,8 @@ const onClickCountButton = (
 function removeCartItem(id: number) {
 	try {
 		cartStore.removeCartItem(id)
-	} catch (e: any) {
-		console.error(e.message)
+	} catch (e) {
+		console.error(e)
 	}
 }
 
@@ -61,7 +60,7 @@ const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 		if (url) {
 			location.href = url
 		}
-	} catch (e: any) {
+	} catch (e) {
 		console.error('Order submission failed:', e)
 		const toast = (await import('vue3-toastify')).toast
 

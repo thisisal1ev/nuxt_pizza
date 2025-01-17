@@ -28,8 +28,8 @@ async function removeCartItem(id: number, name: string) {
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
-	} catch (e: any) {
-		console.error(e.message)
+	} catch (e) {
+		console.error(e)
 		const toast = (await import('vue3-toastify')).toast
 
 		toast.error('Не удалось удалить товар из корзины', {
