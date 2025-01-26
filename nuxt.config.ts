@@ -28,7 +28,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt',
-    '@vee-validate/nuxt'
+    '@vee-validate/nuxt',
+    'nuxt-auth-utils',
   ],
 
   veeValidate: {
@@ -42,9 +43,7 @@ export default defineNuxtConfig({
   css: ['./assets/main.css', 'vue3-toastify/dist/index.css'],
 
   fonts: {
-    families: [
-      { name: 'nunito', provider: 'google' },
-    ],
+    families: [{ name: 'nunito', provider: 'google' }],
   },
 
   experimental: {
