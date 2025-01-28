@@ -5,6 +5,9 @@ interface Props {
 }
 
 defineProps<Props>()
+
+const isOpen = ref<boolean>(false)
+const toggle = () => (isOpen.value = !isOpen.value)
 </script>
 
 <template>
@@ -31,23 +34,11 @@ defineProps<Props>()
 			</div>
 
 			<div class="flex items-center justify-center space-x-4">
-				<Button variant="outline" class="gap-1" size="default">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="20"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-						<circle cx="12" cy="7" r="4" />
-					</svg>
-					<span>Войти</span>
-				</Button>
+				<Teleport to="body">
+					<ModalAuth v-if="isOpen" @openOrCloseModal="toggle" />
+				</Teleport>
+
+				<ProfileButton @onClickSignIn="toggle" />
 
 				<CartButton v-if="!hasCart" />
 			</div>

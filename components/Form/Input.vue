@@ -4,10 +4,10 @@ import Input from '../Input.vue'
 interface Props {
 	name: string
 	label?: string
-	placeholder?: string
 	required?: boolean
 	type?: string
 }
+
 const props = defineProps<Props>()
 
 const { value, errorMessage, setValue, handleChange, handleBlur } =
@@ -33,7 +33,7 @@ const onClickClear = () => {
 				:type
 				:value
 				:required
-				:placeholder
+				:placeholder="label"
 				v-model="value"
 				@input="handleChange"
 				@blur="handleBlur"

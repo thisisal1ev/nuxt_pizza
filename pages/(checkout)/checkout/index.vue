@@ -41,8 +41,8 @@ const { handleSubmit } = useForm<CheckoutFormValues>({
 })
 
 const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
-	console.log('Form submitted with values:', values)
 	submitting.value = true
+
 	try {
 		const toast = (await import('vue3-toastify')).toast
 		const url = await $fetch('/api/order', {

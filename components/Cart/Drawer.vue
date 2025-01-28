@@ -146,6 +146,7 @@ async function removeCartItem(id: number, name: string) {
 					<NuxtLink to="/checkout" class="inline-block w-full">
 						<Button type="submit" class="w-full h-12 text-base">
 							Оформить заказ
+
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="24"
@@ -169,12 +170,20 @@ async function removeCartItem(id: number, name: string) {
 
 		<div v-else class="flex flex-col h-full justify-between">
 			<div class="grow flex-1 flex flex-col items-center justify-center">
-				<img width="120" height="120" src="/empty-box.png" alt="empty box" />
+				<img
+					width="120"
+					height="120"
+					src="/assets/images/empty-box.png"
+					alt="empty box"
+				/>
+
 				<div class="flex flex-col items-center space-y-4">
 					<h4 class="text-center font-bold">Корзина пустая</h4>
+
 					<p className="text-center text-neutral-500">
 						Добавьте хотя бы одну пиццу, чтобы совершить заказ
 					</p>
+
 					<Button
 						@click="$emit('close')"
 						class="w-56 h-12 text-base rounded-xl"
