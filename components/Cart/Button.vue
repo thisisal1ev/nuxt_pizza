@@ -11,6 +11,7 @@ function toggle() {
 	<Teleport to="body">
 		<CartDrawer :isVisible @close="toggle" />
 	</Teleport>
+
 	<Button
 		:disabled="cartStore.loading"
 		@click="isVisible = !isVisible"
@@ -19,10 +20,12 @@ function toggle() {
 		class="relative group w-[105px]"
 	>
 		<b v-if="!cartStore.loading">{{ cartStore.totalAmount }} &#8381;</b>
+
 		<div v-else class="flex items-center space-x-2">
 			<span
 				class="animate-pulse inline-block h-3 bg-primary-foreground rounded w-5"
 			></span>
+
 			<span>&#8381;</span>
 		</div>
 		<span class="h-full w-[1px] bg-white/30 mx-3"></span>
@@ -50,7 +53,9 @@ function toggle() {
 				<path d="m5 11 4-7" />
 				<path d="m9 11 1 9" />
 			</svg>
+
 			<b v-if="!cartStore.loading">{{ cartStore.items.length }}</b>
+
 			<span
 				v-else
 				class="animate-pulse h-3 inline-block bg-primary-foreground rounded w-2"

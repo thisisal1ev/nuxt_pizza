@@ -35,7 +35,7 @@
 
 	html,
 	body {
-		@apply font-nunito text-sm leading-5 font-normal scroll-smooth;
+		@apply font-nunito text-sm leading-5 font-normal scroll-smooth selection:bg-primary selection:text-white;
 	}
 
 	a,

@@ -50,5 +50,22 @@ export default defineNuxtConfig({
     componentIslands: true,
   },
 
+  runtimeConfig: {
+    oauth: {
+      google: {
+        clientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
+      },
+      github: {
+        clientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET,
+      },
+      gitlab: {
+        clientId: process.env.NUXT_OAUTH_GITLAB_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GITLAB_CLIENT_SECRET,
+      }
+    }
+  },
+
   compatibilityDate: '2024-09-15',
 })

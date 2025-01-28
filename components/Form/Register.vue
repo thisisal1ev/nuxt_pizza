@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { regisFormSchema } from './schema'
 
+const emit = defineEmits(['openOrCloseModal'])
 const { handleSubmit } = useForm({
 	validationSchema: regisFormSchema,
 	initialValues: {
@@ -12,7 +13,15 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async data => {
-	console.log(data)
+	$fetch('/api/user', {
+		method: 'POST',
+		body: data,
+	})
+
+	setTimeout(() => {
+		location.href = '/'
+		emit('openOrCloseModal')
+	}, 1000)
 })
 </script>
 

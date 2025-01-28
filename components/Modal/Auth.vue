@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineEmits(['openOrCloseModal'])
-type Providers = 'github' | 'google'
+type Providers = 'github' | 'google' | 'gitlab'
 
 const regis = (provider: Providers) => {
 	location.href = `/api/auth/${provider}`
@@ -20,6 +20,20 @@ const onSwitchType = () => {
 	></div>
 
 	<dialog
+		v-motion
+		:initial="{ scale: 0 }"
+		:enter="{
+			transition: {
+				duration: 250,
+			},
+			scale: 1,
+		}"
+		:leave="{
+			transition: {
+				duration: 250,
+			},
+			scale: 0,
+		}"
 		class="z-50 mt-20 w-full max-w-xl bg-white rounded-lg shadow-lg p-6 space-y-5"
 		open
 	>
@@ -44,28 +58,46 @@ const onSwitchType = () => {
 				</svg>
 			</button>
 
-			<FormRegister v-if="type === 'register'" />
+			<FormRegister
+				v-if="type === 'register'"
+				@openOrCloseModal="$emit('openOrCloseModal')"
+			/>
 
-			<FormLogin v-else />
+			<FormLogin v-else @openOrCloseModal="$emit('openOrCloseModal')" />
 		</div>
 
 		<hr />
 
-		<div class="flex gap-5">
-			<Button
-				variant="secondary"
-				@click="regis('github')"
-				type="button"
-				class="gap-2 h-12 p-2 flex-1"
-			>
-				<img
-					class="w-6 h-6"
-					src="https://github.githubassets.com/favicons/favicon.svg"
-				/>
+		<div class="flex flex-col gap-5">
+			<div class="flex gap-5">
+				<Button
+					variant="secondary"
+					@click="regis('github')"
+					type="button"
+					class="gap-2 h-12 p-2 flex-1"
+				>
+					<img
+						class="w-6 h-6"
+						src="https://github.githubassets.com/favicons/favicon.svg"
+					/>
 
-				GitHub
-			</Button>
+					GitHub
+				</Button>
 
+				<Button
+					variant="secondary"
+					@click="regis('gitlab')"
+					type="button"
+					class="gap-2 h-12 p-2 flex-1"
+				>
+					<img
+						class="w-6 h-6"
+						src="https://pnglogo.sgp1.digitaloceanspaces.com/d/gitlab-original.svg"
+					/>
+
+					GitLab
+				</Button>
+			</div>
 			<Button
 				variant="secondary"
 				@click="regis('google')"

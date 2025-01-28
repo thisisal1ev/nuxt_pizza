@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { loginFormSchema } from './schema'
 
+const emit = defineEmits(['openOrCloseModal'])
 const { handleSubmit } = useForm({
 	validationSchema: loginFormSchema,
 	initialValues: {
@@ -10,7 +11,15 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async data => {
-	console.log(data)
+	$fetch('/api/auth', {
+		method: 'POST',
+		body: data,
+	})
+
+	setTimeout(() => {
+		emit('openOrCloseModal')
+		location.href = '/'
+	}, 1000)
 })
 </script>
 
