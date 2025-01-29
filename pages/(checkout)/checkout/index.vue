@@ -77,43 +77,41 @@ const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 </script>
 
 <template>
-	<div class="mt-5">
-		<h1 class="font-extrabold mb-8 text-[36px] leading-9">Оформление заказа</h1>
+	<h1 class="font-extrabold mb-8 text-[36px] leading-9">Оформление заказа</h1>
 
-		<form @submit="onSubmit">
-			<div class="flex gap-10">
-				<div class="flex flex-col gap-10 flex-1 mb-20">
-					<CheckoutCart
-						:items="cartStore.items"
-						:loading="cartStore.loading"
-						@onClickCountButton="onClickCountButton"
-						@removeCartItem="removeCartItem"
-					/>
+	<form @submit="onSubmit">
+		<div class="flex gap-10">
+			<div class="flex flex-col gap-10 flex-1 mb-20">
+				<CheckoutCart
+					:items="cartStore.items"
+					:loading="cartStore.loading"
+					@onClickCountButton="onClickCountButton"
+					@removeCartItem="removeCartItem"
+				/>
 
-					<CheckoutPersonalForm
-						:class="
-							cartStore.loading
-								? 'opacity-40 pointer-events-none select-none'
-								: ''
-						"
-					/>
+				<CheckoutPersonalForm
+					:class="
+						cartStore.loading
+							? 'opacity-40 pointer-events-none select-none'
+							: ''
+					"
+				/>
 
-					<CheckoutAddressForm
-						:class="
-							cartStore.loading
-								? 'opacity-40 pointer-events-none select-none'
-								: ''
-						"
-					/>
-				</div>
-
-				<div class="w-[450px]">
-					<CheckoutSidebar
-						:loading="cartStore.loading || submitting"
-						:totalAmount="cartStore.totalAmount"
-					/>
-				</div>
+				<CheckoutAddressForm
+					:class="
+						cartStore.loading
+							? 'opacity-40 pointer-events-none select-none'
+							: ''
+					"
+				/>
 			</div>
-		</form>
-	</div>
+
+			<div class="w-[450px]">
+				<CheckoutSidebar
+					:loading="cartStore.loading || submitting"
+					:totalAmount="cartStore.totalAmount"
+				/>
+			</div>
+		</div>
+	</form>
 </template>

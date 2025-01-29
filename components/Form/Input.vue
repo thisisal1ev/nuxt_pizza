@@ -39,9 +39,7 @@ const onClickClear = () => {
 				@blur="handleBlur"
 				:class="
 					'text-base border-2 outline-none transition-all duration-300 focus:border-primary h-12 text-md' +
-					(errorText
-						? ' border-red-500 shadow-md shadow-red-500 focus:shadow-red-500 focus:border-red-500'
-						: '')
+					(errorText ? ' border-red-500 focus:border-red-500' : '')
 				"
 			/>
 

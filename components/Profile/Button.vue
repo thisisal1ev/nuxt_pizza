@@ -29,10 +29,7 @@ const { loggedIn } = useUserSession()
 	</Button>
 
 	<NuxtLink v-else to="/profile">
-		<Button
-			class="flex items-center gap-1"
-			variant="secondary"
-		>
+		<Button class="flex items-center gap-1" variant="secondary">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="18"

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 useSeoMeta({
-	title: 'Nuxt Pizza | Dashboard',
+	title: 'Nuxt Pizza | Панель управления',
 	description: 'Nuxt Pizza | Панель управления',
 })
 </script>

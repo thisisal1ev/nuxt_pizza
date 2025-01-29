@@ -2,7 +2,7 @@
 import { loginFormSchema } from './schema'
 
 const emit = defineEmits(['openOrCloseModal'])
-const { handleSubmit } = useForm({
+const { handleSubmit, isSubmitting } = useForm({
 	validationSchema: loginFormSchema,
 	initialValues: {
 		email: '',
@@ -11,15 +11,41 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async data => {
-	$fetch('/api/auth', {
-		method: 'POST',
-		body: data,
-	})
+	try {
+		const toast = (await import('vue3-toastify')).toast
 
-	setTimeout(() => {
-		emit('openOrCloseModal')
-		location.href = '/'
-	}, 1000)
+		const resp = await $fetch('/api/auth', {
+			method: 'POST',
+			body: data,
+		})
+
+		if (!resp.user) {
+			return toast.error('Не удалось войти в аккаунт', {
+				icon: '❌',
+				position: 'top-center',
+				pauseOnHover: false,
+				bodyClassName: 'font-nunito',
+			})
+		}
+
+		toast.success('Вы успешно вошли в аккаунт', {
+			icon: '✅',
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	} catch (e) {
+		const toast = (await import('vue3-toastify')).toast
+
+		console.error('Error [LOGIN]', e)
+
+		toast.error('Не удалось войти в аккаунт', {
+			icon: '❌',
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	}
 })
 </script>
 
@@ -45,6 +71,8 @@ const onSubmit = handleSubmit(async data => {
 		<FormInput name="email" label="E-Mail" required />
 		<FormInput name="password" label="Пароль" type="password" required />
 
-		<Button class="h-12 text-base" type="submit"> Войти </Button>
+		<Button :disabled="isSubmitting" class="h-12 text-base" type="submit">
+			{{ isSubmitting ? 'Вход...' : 'Войти' }}
+		</Button>
 	</form>
 </template>
