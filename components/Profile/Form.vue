@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import type { User } from '@prisma/client'
 import { regisFormSchema, type TFormRegisterValues } from '../Form/schema'
 
-const { user } = defineProps<{ user: any }>()
+const { user } = defineProps<{ user: User }>()
 const { clear } = useUserSession()
 const { handleSubmit, isSubmitting } = useForm({
 	validationSchema: regisFormSchema,
@@ -17,6 +18,11 @@ const onSubmit = handleSubmit(async (data: TFormRegisterValues) => {
 	try {
 		const toast = (await import('vue3-toastify')).toast
 
+		await $fetch('/api/user', {
+			method: 'PATCH',
+			body: data,
+		})
+
 		toast.success('Данные обновлены 📝', {
 			icon: '✅',
 			position: 'top-center',
@@ -24,9 +30,9 @@ const onSubmit = handleSubmit(async (data: TFormRegisterValues) => {
 			bodyClassName: 'font-nunito',
 		})
 	} catch (e) {
-		console.log(e)
-
 		const toast = (await import('vue3-toastify')).toast
+
+		console.log(e)
 
 		toast.error('Не удалось обновить данные', {
 			icon: '❌',
@@ -72,7 +78,7 @@ const signOut = () => {
 			class="text-base"
 			type="button"
 		>
-			Выйти
+			Выйти из аккаунта
 		</Button>
 	</form>
 </template>

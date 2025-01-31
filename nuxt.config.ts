@@ -30,25 +30,21 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@vee-validate/nuxt',
     'nuxt-auth-utils',
+    '@nuxt/icon',
   ],
 
-  veeValidate: {
-    autoImports: true,
+  icon: {
+    mode: 'svg',
+    size: '16'
   },
 
-  pinia: {
-    storesDirs: ['./store/**'],
-  },
+  veeValidate: { autoImports: true },
+
+  pinia: { storesDirs: ['./store/**'] },
 
   css: ['./assets/main.css', 'vue3-toastify/dist/index.css'],
 
-  fonts: {
-    families: [{ name: 'nunito', provider: 'google' }],
-  },
-
-  experimental: {
-    componentIslands: true,
-  },
+  fonts: { families: [{ name: 'nunito', provider: 'google' }], },
 
   runtimeConfig: {
     oauth: {

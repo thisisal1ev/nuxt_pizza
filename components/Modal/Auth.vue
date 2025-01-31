@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-defineEmits(['openOrCloseModal'])
 type Providers = 'github' | 'google' | 'gitlab'
 
 const regis = (provider: Providers) => {
@@ -7,10 +6,11 @@ const regis = (provider: Providers) => {
 }
 
 const type = ref<'login' | 'register'>('register')
-
 const onSwitchType = () => {
 	type.value = type.value === 'register' ? 'login' : 'register'
 }
+
+defineEmits(['openOrCloseModal'])
 </script>
 
 <template>
@@ -42,28 +42,12 @@ const onSwitchType = () => {
 				@click="$emit('openOrCloseModal')"
 				class="absolute -right-2 -top-2"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="18"
-					height="18"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<path d="M18 6 6 18" />
-					<path d="m6 6 12 12" />
-				</svg>
+				<Icon name="lucide:x" size="18" />
 			</button>
 
-			<FormRegister
-				v-if="type === 'register'"
-				@openOrCloseModal="$emit('openOrCloseModal')"
-			/>
+			<FormRegister v-if="type === 'register'" />
 
-			<FormLogin v-else @openOrCloseModal="$emit('openOrCloseModal')" />
+			<FormLogin v-else />
 		</div>
 
 		<hr />
@@ -76,10 +60,7 @@ const onSwitchType = () => {
 					type="button"
 					class="gap-2 h-12 p-2 flex-1"
 				>
-					<img
-						class="w-6 h-6"
-						src="https://github.githubassets.com/favicons/favicon.svg"
-					/>
+					<Icon name="logos:github-icon" />
 
 					GitHub
 				</Button>
@@ -90,10 +71,7 @@ const onSwitchType = () => {
 					type="button"
 					class="gap-2 h-12 p-2 flex-1"
 				>
-					<img
-						class="w-6 h-6"
-						src="https://pnglogo.sgp1.digitaloceanspaces.com/d/gitlab-original.svg"
-					/>
+					<Icon name="logos:gitlab" />
 
 					GitLab
 				</Button>
@@ -102,12 +80,9 @@ const onSwitchType = () => {
 				variant="secondary"
 				@click="regis('google')"
 				type="button"
-				class="gap-2 h-12 p-2 flex-1"
+				class="gap-2 h-12 px-2 py-4 flex-1"
 			>
-				<img
-					class="w-6 h-6"
-					src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
-				/>
+				<Icon name="logos:google-icon" />
 
 				Google
 			</Button>

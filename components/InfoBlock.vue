@@ -21,20 +21,7 @@ defineProps<Props>()
 			<div class="flex gap-5 mt-11">
 				<NuxtLink href="/">
 					<Button variant="outline" class="gap-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<path d="m12 19-7-7 7-7" />
-							<path d="M19 12H5" />
-						</svg>
+						<Icon name="lucide:arrow-left" />
 
 						На главную
 					</Button>
@@ -43,7 +30,7 @@ defineProps<Props>()
 				<a href="">
 					<Button
 						variant="outline"
-						class="!text-gray-500 border-gray-400 hover:bg-gray-50"
+						class="!text-gray-500 !border-gray-400 hover:!bg-gray-50"
 					>
 						Обновить
 					</Button>

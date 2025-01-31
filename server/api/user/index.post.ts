@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 		data: candidate,
 	})
 
-	const { password, ...result } = user
+	const session = setUserSession(event, { user })
 
-	return result
+	return session
 })

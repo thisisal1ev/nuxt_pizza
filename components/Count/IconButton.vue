@@ -26,36 +26,18 @@ defineEmits(['onClick'])
 		]"
 		class="p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400"
 	>
-		<svg
+		<Icon
 			v-if="type === 'minus'"
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			:class="['sm' === 'sm' ? 'h-4' : 'h-5']"
-		>
-			<path d="M5 12h14" />
-		</svg>
-		<svg
+			name="lucide:minus"
+			size="24"
+			:class="[size === 'sm' ? 'h-4' : 'h-5']"
+		/>
+
+		<Icon
 			v-else
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			:class="['sm' === 'sm' ? 'h-4' : 'h-5']"
-		>
-			<path d="M5 12h14" />
-			<path d="M12 5v14" />
-		</svg>
+			name="lucide:plus"
+			size="24"
+			:class="[size === 'sm' ? 'h-4' : 'h-5']"
+		/>
 	</Button>
 </template>

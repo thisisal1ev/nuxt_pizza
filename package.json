@@ -32,6 +32,7 @@
 		"zod": "^3.24.1"
 	},
 	"devDependencies": {
+		"@nuxt/icon": "^1.10.3",
 		"@prisma/client": "^5.22.0",
 		"@types/bcrypt": "^5.0.2",
 		"@types/qs": "^6.9.17",

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { User } from '@prisma/client'
 import { loginFormSchema } from './schema'
 
-const emit = defineEmits(['openOrCloseModal'])
 const { handleSubmit, isSubmitting } = useForm({
 	validationSchema: loginFormSchema,
 	initialValues: {
@@ -14,7 +14,7 @@ const onSubmit = handleSubmit(async data => {
 	try {
 		const toast = (await import('vue3-toastify')).toast
 
-		const resp = await $fetch('/api/auth', {
+		const resp = await $fetch<{ user: User }>('/api/auth', {
 			method: 'POST',
 			body: data,
 		})
@@ -34,6 +34,10 @@ const onSubmit = handleSubmit(async data => {
 			pauseOnHover: false,
 			bodyClassName: 'font-nunito',
 		})
+
+		setTimeout(() => {
+			location.href = '/'
+		}, 500)
 	} catch (e) {
 		const toast = (await import('vue3-toastify')).toast
 

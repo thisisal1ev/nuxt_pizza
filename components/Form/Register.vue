@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { regisFormSchema } from './schema'
+import type { User } from '@prisma/client'
+import { regisFormSchema, type TFormRegisterValues } from './schema'
 
-const emit = defineEmits(['openOrCloseModal'])
 const { handleSubmit } = useForm({
 	validationSchema: regisFormSchema,
 	initialValues: {
@@ -12,16 +12,50 @@ const { handleSubmit } = useForm({
 	},
 })
 
-const onSubmit = handleSubmit(async data => {
-	$fetch('/api/user', {
-		method: 'POST',
-		body: data,
-	})
+const onSubmit = handleSubmit(async (data: TFormRegisterValues) => {
+	try {
+		const toast = (await import('vue3-toastify')).toast
 
-	setTimeout(() => {
-		location.href = '/'
-		emit('openOrCloseModal')
-	}, 1000)
+		const resp = await $fetch<{ user: User }>('/api/user', {
+			method: 'POST',
+			body: {
+				email: data.email,
+				fullName: data.fullName,
+				password: data.password,
+			},
+		})
+
+		if (!resp.user) {
+			return toast.error('Не удалось зарегистрироваться', {
+				icon: '❌',
+				position: 'top-center',
+				pauseOnHover: false,
+				bodyClassName: 'font-nunito',
+			})
+		}
+
+		toast.success('Регистрация прошла успешна 📝. Подтвердите свою почту', {
+			icon: '✅',
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+
+		setTimeout(() => {
+			location.href = '/'
+		}, 500)
+	} catch (e) {
+		const toast = (await import('vue3-toastify')).toast
+
+		console.error('Error [REGISTRATION]', e)
+
+		toast.error('Не удалось войти в аккаунт', {
+			icon: '❌',
+			position: 'top-center',
+			pauseOnHover: false,
+			bodyClassName: 'font-nunito',
+		})
+	}
 })
 </script>
 

@@ -47,6 +47,7 @@ async function removeCartItem(id: number, name: string) {
 		@click="$emit('close')"
 		class="opacity-50 z-40 fixed bg-black top-0 left-0 w-full h-full"
 	></div>
+
 	<div
 		v-motion
 		:initial="{
@@ -85,20 +86,7 @@ async function removeCartItem(id: number, name: string) {
 						>
 					</h4>
 					<button type="button" @click="$emit('close')">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<path d="M18 6 6 18" />
-							<path d="m6 6 12 12" />
-						</svg>
+						<Icon name="lucide:x" size="24" />
 					</button>
 				</div>
 			</div>
@@ -147,21 +135,7 @@ async function removeCartItem(id: number, name: string) {
 						<Button type="submit" class="w-full h-12 text-base">
 							Оформить заказ
 
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="w-5 ml-4"
-							>
-								<path d="M5 12h14" />
-								<path d="m12 5 7 7-7 7" />
-							</svg>
+							<Icon name="lucide:arrow-right" size="18" class="ml-4" />
 						</Button>
 					</NuxtLink>
 				</div>
@@ -189,21 +163,7 @@ async function removeCartItem(id: number, name: string) {
 						class="w-56 h-12 text-base rounded-xl"
 						size="lg"
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							class="w-5 mr-2"
-						>
-							<path d="m12 19-7-7 7-7" />
-							<path d="M19 12H5" />
-						</svg>
+						<Icon name="lucide:arrow-left" size="18" class="mr-2" />
 
 						Вернуться назад
 					</Button>

@@ -21,8 +21,10 @@ const toggle = () => (isOpen.value = !isOpen.value)
 					src="/logo.png"
 					alt="logo"
 				/>
+
 				<div class="flex flex-col">
 					<span class="uppercase font-black text-2xl">Nuxt pizza</span>
+
 					<span class="text-sm leading-3 text-gray-400"
 						>вкусней уже некуда</span
 					>
