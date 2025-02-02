@@ -34,7 +34,7 @@ defineEmits(['openOrCloseModal'])
 			},
 			scale: 0,
 		}"
-		class="z-50 mt-20 w-full max-w-xl bg-white rounded-lg shadow-lg p-6 space-y-5"
+		class="z-50 mt-20 w-full max-w-xl bg-white rounded-lg shadow-lg p-6 space-y-5 fixed top-0"
 		open
 	>
 		<div class="relative">
@@ -45,7 +45,10 @@ defineEmits(['openOrCloseModal'])
 				<Icon name="lucide:x" size="18" />
 			</button>
 
-			<FormRegister v-if="type === 'register'" />
+			<FormRegister
+				v-if="type === 'register'"
+				@closeModal="$emit('openOrCloseModal')"
+			/>
 
 			<FormLogin v-else />
 		</div>

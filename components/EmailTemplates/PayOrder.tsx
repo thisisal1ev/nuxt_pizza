@@ -1,18 +1,16 @@
 import { defineComponent, h } from 'vue'
 
 export default defineComponent({
+	name: 'payOrder',
 	props: {
 		orderId: {
 			type: Number,
-			required: true,
 		},
 		totalAmount: {
 			type: Number,
-			required: true,
 		},
 		paymentURL: {
 			type: String,
-			required: true,
 		},
 	},
 	setup(props) {

@@ -17,7 +17,7 @@ const { loggedIn } = useUserSession()
 
 	<NuxtLink v-else to="/profile">
 		<Button class="flex items-center gap-3" variant="secondary">
-			<Icon name="lucide:circle-user" size="18" />
+			<Icon name="lucide:circle-user-round" size="18" />
 
 			<span>Профиль</span>
 		</Button>

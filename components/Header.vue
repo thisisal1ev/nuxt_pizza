@@ -8,6 +8,34 @@ defineProps<Props>()
 
 const isOpen = ref<boolean>(false)
 const toggle = () => (isOpen.value = !isOpen.value)
+
+const router = useRouter()
+const route = useRoute()
+
+watchEffect(async () => {
+	const toast = (await import('vue3-toastify')).toast
+	let toastMessage = ''
+
+	if (route.query.paid) {
+		toastMessage = 'Заказ успешно оплачен! Информация отправлена на почту.'
+	}
+
+	if (route.query.verified) {
+		toastMessage = 'Почта успешно подтверждена!'
+	}
+
+	if (toastMessage) {
+		setTimeout(() => {
+			router.replace('/')
+			toast.success(toastMessage, {
+				position: 'top-center',
+				pauseOnHover: false,
+				bodyClassName: 'font-nunito',
+				delay: 3000,
+			})
+		}, 1000)
+	}
+})
 </script>
 
 <template>

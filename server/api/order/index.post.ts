@@ -86,7 +86,8 @@ export default defineEventHandler(async (event) => {
 				orderId: order.id,
 				totalAmount: order.totalAmount,
 				paymentURL,
-			}
+			},
+			false
 		)
 
 		return paymentURL

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const passwordSchema = z.string().min(4, { message: 'Введите корректный пароль' })
+export const passwordSchema = z.string().min(6, { message: 'Введите корректный пароль' })
 
 export const formLoginSchema = z.object({
   email: z.string().email({ message: 'Введите корректную почту' }),

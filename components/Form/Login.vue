@@ -72,7 +72,7 @@ const onSubmit = handleSubmit(async data => {
 			/>
 		</div>
 
-		<FormInput name="email" label="E-Mail" required />
+		<FormInput name="email" label="E-Mail" type="email" required />
 		<FormInput name="password" label="Пароль" type="password" required />
 
 		<Button :disabled="isSubmitting" class="h-12 text-base" type="submit">
