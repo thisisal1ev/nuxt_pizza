@@ -3,6 +3,7 @@ import {
 	checkoutFormSchema,
 	type CheckoutFormValues,
 } from '~/constants/checkout-form-schema'
+import { Api } from '~/services/apiClient'
 
 definePageMeta({
 	layout: 'checkout-layout',
@@ -28,7 +29,7 @@ function removeCartItem(id: number) {
 	}
 }
 
-const { handleSubmit } = useForm<CheckoutFormValues>({
+const { handleSubmit, setFieldValue } = useForm<CheckoutFormValues>({
 	validationSchema: checkoutFormSchema,
 	initialValues: {
 		email: '',
@@ -39,6 +40,8 @@ const { handleSubmit } = useForm<CheckoutFormValues>({
 		comment: '',
 	},
 })
+
+const { user } = useUserSession()
 
 const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 	submitting.value = true
@@ -72,6 +75,21 @@ const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 		})
 	} finally {
 		submitting.value = false
+	}
+})
+
+onMounted(async () => {
+	async function fetchUserInfo() {
+		const data = await Api.auth.getMe()
+		const [firstName, lastName] = data.fullName.split(' ')
+
+		setFieldValue('firstName', firstName)
+		setFieldValue('lastName', lastName)
+		setFieldValue('email', data.email)
+	}
+
+	if (user) {
+		await fetchUserInfo()
 	}
 })
 </script>

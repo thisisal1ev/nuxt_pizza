@@ -1,6 +1,7 @@
+import prisma from '~/lib/prisma'
+
 import { User } from '@prisma/client'
 import { compare } from 'bcrypt'
-import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
 	const body: User = await readBody(event)

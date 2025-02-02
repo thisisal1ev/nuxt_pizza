@@ -12,7 +12,7 @@ const toggle = () => (isOpen.value = !isOpen.value)
 const router = useRouter()
 const route = useRoute()
 
-watchEffect(async () => {
+onMounted(async () => {
 	const toast = (await import('vue3-toastify')).toast
 	let toastMessage = ''
 
