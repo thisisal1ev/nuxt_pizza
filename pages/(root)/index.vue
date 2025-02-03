@@ -22,6 +22,8 @@ const { data: categories, status } = await useAsyncData<CategoryProps[]>(
 		:categories="categories.filter(category => category.products.length > 0)"
 	/>
 
+	<Stories />
+
 	<div class="container mt-10 pb-14">
 		<div class="flex gap-[80px]">
 			<div class="w-[250px]">

@@ -12,6 +12,7 @@ useSeoMeta({
 			:hasCart="true"
 			class="border-b-gray-200 container"
 		/>
+
 		<div class="grow h-auto container my-10">
 			<slot />
 		</div>

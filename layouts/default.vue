@@ -7,6 +7,7 @@ useSeoMeta({
 
 <template>
 	<Header />
+
 	<main class="flex flex-col w-full min-h-screen mt-10">
 		<div class="grow h-auto">
 			<slot />

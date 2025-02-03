@@ -16,6 +16,11 @@ if (!product && !error) {
 		statusMessage: 'Product not found',
 	})
 }
+
+useSeoMeta({
+	title: `Nuxt Pizza | ${product.value?.name}`,
+	description: `Nuxt Pizza | ${product.value?.name}`,
+})
 </script>
 
 <template>
