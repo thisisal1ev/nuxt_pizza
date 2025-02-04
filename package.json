@@ -2,6 +2,10 @@
 	"name": "nuxt-pizza",
 	"private": true,
 	"type": "module",
+	"author": {
+		"email": "aaalievvv1@gmail.com",
+		"name": "Axmadillo"
+	},
 	"scripts": {
 		"build": "nuxt build",
 		"dev": "nuxt dev",
