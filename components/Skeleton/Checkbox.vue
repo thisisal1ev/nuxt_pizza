@@ -8,7 +8,7 @@ defineProps<Props>()
 
 <template>
 	<div
-		class="flex items-center my-auto w-full gap-4 animate-pulse select-none"
+		class="flex items-center justify-center my-auto w-full gap-4 space-y-1.5 animate-pulse select-none"
 		:class
 	>
 		<div class="grid bg-gray-300 rounded-lg h-6 w-7 place-items-center"></div>

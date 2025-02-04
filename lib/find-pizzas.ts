@@ -70,5 +70,5 @@ export const findPizzas = async (params: GetSearchParams) => {
 		},
 	})
 
-	return categories
+	return categories.filter(category => category.products.length > 0)
 }

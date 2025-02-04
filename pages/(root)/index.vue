@@ -6,10 +6,27 @@ export interface CategoryProps extends Category {
 	products: ProductWithRelations[]
 }
 
-const { data: categories, status } = await useAsyncData<CategoryProps[]>(
-	'categories',
-	() => $fetch<CategoryProps[]>('/api/categories')
+const route = useRoute()
+const categories = ref<CategoryProps[]>([])
+
+const { data, refresh, status } = useAsyncData<CategoryProps[]>(
+	'filteredPizzas',
+	() => $fetch<CategoryProps[]>('/api/filteredPizzas', { query: route.query })
 )
+
+watch(
+	() => route.query,
+	() => {
+		refresh()
+	},
+	{ deep: true }
+)
+
+watchEffect(() => {
+	if (data.value) {
+		categories.value = data.value
+	}
+})
 </script>
 
 <template>
@@ -33,18 +50,21 @@ const { data: categories, status } = await useAsyncData<CategoryProps[]>(
 			<div class="flex-1">
 				<div class="flex flex-col gap-16">
 					<SkeletonProductGroup
-						v-if="status !== 'success'"
+						v-if="categories.length === 0 && status === 'pending'"
 						v-for="i in 3"
 						:key="i"
 					/>
+
 					<ProductsGroup
-						v-if="categories"
+						v-if="categories.length > 0"
 						v-for="category in categories"
 						:categoryId="category.id"
 						:title="category.name"
 						:key="category.id"
 						:products="category.products"
 					/>
+
+					<h3 v-else class="font-bold">Ничего не найдено</h3>
 				</div>
 			</div>
 		</div>
