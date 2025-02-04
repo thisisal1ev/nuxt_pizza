@@ -1,12 +1,7 @@
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
 
   app: {
     head: {
@@ -44,7 +39,15 @@ export default defineNuxtConfig({
 
   css: ['./assets/main.css', 'vue3-toastify/dist/index.css'],
 
-  fonts: { families: [{ name: 'nunito', provider: 'google' }], },
+  fonts: {
+    families: [{ name: 'Nunito', provider: 'google' }],
+    experimental: {
+      // Required for TailwindCSS v4. You can enable support for processing CSS variables for font family names. This may have a performance impact.
+      processCSSVariables: true,
+      // Defines whether to enable adding local fallbacks. Default is `false`.
+      disableLocalFallbacks: true
+    }
+  },
 
   runtimeConfig: {
     oauth: {
@@ -62,6 +65,8 @@ export default defineNuxtConfig({
       }
     }
   },
+
+  vite: { plugins: [tailwindcss(),], },
 
   compatibilityDate: '2024-09-15',
 })

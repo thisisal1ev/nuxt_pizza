@@ -50,7 +50,7 @@ const onClickItem = (): void => {
 		/>
 
 		<input
-			class="outline-none w-full !rounded-2xl border-none bg-gray-100 pl-11"
+			class="outline-hidden w-full rounded-2xl! border-none bg-gray-100 pl-11"
 			type="search"
 			v-model.trim="searchQuery"
 			placeholder="Поиск пиццы..."
@@ -70,7 +70,7 @@ const onClickItem = (): void => {
 				@click="onClickItem"
 			>
 				<img
-					class="rounded-sm h-8 w-8"
+					class="rounded-xs h-8 w-8"
 					:src="product.imgURL"
 					:alt="product.name"
 				/>

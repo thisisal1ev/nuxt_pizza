@@ -23,7 +23,7 @@ function toggle() {
 
 		<div v-else class="flex items-center space-x-2">
 			<span
-				class="animate-pulse inline-block h-3 bg-primary-foreground rounded w-5"
+				class="animate-pulse inline-block h-3 bg-primary-foreground rounded-sm w-5"
 			></span>
 
 			<span>&#8381;</span>
@@ -39,7 +39,7 @@ function toggle() {
 
 			<span
 				v-else
-				class="animate-pulse h-3 inline-block bg-primary-foreground rounded w-2"
+				class="animate-pulse h-3 inline-block bg-primary-foreground rounded-sm w-2"
 			></span>
 		</div>
 

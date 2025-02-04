@@ -20,7 +20,7 @@ defineProps<Props>()
 			<Icon
 				name="lucide:circle-check"
 				size="24"
-				class="absolute top-2 right-2 !text-primary"
+				class="absolute top-2 right-2 text-primary!"
 			/>
 		</template>
 		<img :width="110" :height="110" :src="imgURL" />

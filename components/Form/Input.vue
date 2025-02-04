@@ -38,7 +38,7 @@ const onClickClear = () => {
 				@input="handleChange"
 				@blur="handleBlur"
 				:class="
-					'text-base border-2 outline-none transition-all duration-300 focus:border-primary h-12 text-md' +
+					'text-base border-2 outline-hidden transition-all duration-300 focus:border-primary h-12 text-md' +
 					(errorText ? ' border-red-500 focus:border-red-500' : '')
 				"
 			/>
