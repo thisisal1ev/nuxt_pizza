@@ -7,11 +7,13 @@ export interface CategoryProps extends Category {
 }
 
 const route = useRoute()
-const categories = ref<CategoryProps[]>([])
 
-const { data, refresh, status } = useAsyncData<CategoryProps[]>(
-	'filteredPizzas',
-	() => $fetch<CategoryProps[]>('/api/filteredPizzas', { query: route.query })
+const {
+	data: categories,
+	refresh,
+	status,
+} = useAsyncData<CategoryProps[]>('filteredPizzas', () =>
+	$fetch<CategoryProps[]>('/api/filteredPizzas', { query: route.query })
 )
 
 watch(
@@ -21,12 +23,6 @@ watch(
 	},
 	{ deep: true }
 )
-
-watchEffect(() => {
-	if (data.value) {
-		categories.value = data.value
-	}
-})
 </script>
 
 <template>

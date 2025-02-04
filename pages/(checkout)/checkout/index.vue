@@ -81,11 +81,13 @@ const onSubmit = handleSubmit(async (values: CheckoutFormValues) => {
 onMounted(async () => {
 	async function fetchUserInfo() {
 		const data = await Api.auth.getMe()
-		const [firstName, lastName] = data.fullName.split(' ')
+		const [firstName, lastName] = data
+			? data.fullName.split(' ')
+			: user.value.fullName.split(' ')
 
 		setFieldValue('firstName', firstName)
 		setFieldValue('lastName', lastName)
-		setFieldValue('email', data.email)
+		setFieldValue('email', data.email || user.value.email)
 	}
 
 	if (user) {
